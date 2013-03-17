@@ -4,7 +4,7 @@
   <title><![CDATA[Andrew's Thoughts]]></title>
   <link href="http://a-warner.github.com/atom.xml" rel="self"/>
   <link href="http://a-warner.github.com/"/>
-  <updated>2013-03-17T17:42:42-04:00</updated>
+  <updated>2013-03-17T18:19:58-04:00</updated>
   <id>http://a-warner.github.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -12,5 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My first blog post]]></title>
+    <link href="http://a-warner.github.com/blog/2013/03/17/my-first-blog-post/"/>
+    <updated>2013-03-17T18:07:00-04:00</updated>
+    <id>http://a-warner.github.com/blog/2013/03/17/my-first-blog-post</id>
+    <content type="html"><![CDATA[<p>This is my first blog post! I setup up my blog using <a href="http://octopress.org/">Octopress</a>, which was incredibly easy.  They&#8217;ve got some great guides on their site, but just to give you a sense of exactly how easy it is, I simply:</p>
+
+<ul>
+<li>Created a repository on github named a-warner.github.com - the standard naming conventions that <a href="http://pages.github.com/">Github Pages</a> expects if I want a-warner.github.com to resolve to this blog</li>
+<li>Cloned Octopress via <code>git clone git://github.com/imathis/octopress.git a-warner.github.com</code>, ran <code>bundle</code></li>
+<li>Next step was to run <code>rake setup_github_pages</code></li>
+<li>Then it&#8217;s as simple as <code>rake generate</code> and <code>rake deploy</code>!</li>
+<li>Creating this blog post just involved running <code>rake new_post["My first blog post"]</code></li>
+</ul>
+
+
+<p>The writing process is extremely simple - just run <code>rake preview</code> until it looks right, and then <code>rake deploy</code> after committing your changes.</p>
+
+<p>Not that I should be surprised, but using Octopress is really a breeze, and I highly recommend it to anybody looking to crank out a quick blog with minimal setup and maintenance.</p>
+]]></content>
+  </entry>
   
 </feed>
