@@ -5,12 +5,18 @@
         <lastmod>2013-03-17T18:19:57-04:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/
+        </loc>
+        <lastmod>2013-03-17T18:59:32-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://a-warner.github.com/blog/archives/</loc>
-        <lastmod>2013-03-17T18:19:57-04:00</lastmod>
+        <lastmod>2013-03-17T18:59:32-04:00</lastmod>
     </url>
     <url>
         <loc>http://a-warner.github.com/</loc>
-        <lastmod>2013-03-17T18:19:57-04:00</lastmod>
+        <lastmod>2013-03-17T18:59:32-04:00</lastmod>
     </url>
     <url>
         <loc>http://a-warner.github.com/robots.txt</loc>

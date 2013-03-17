@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | Andrew's Thoughts]]></title>
+  <link href="http://a-warner.github.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://a-warner.github.com/"/>
+  <updated>2013-03-17T18:59:33-04:00</updated>
+  <id>http://a-warner.github.com/</id>
+  <author>
+    <name><![CDATA[Andrew Warner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Simple Active Record Query Debugging in the Rails Console]]></title>
+    <link href="http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
+    <updated>2013-03-17T18:22:00-04:00</updated>
+    <id>http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
+    <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You're tooling around in the Rails console, testing out some new code you're working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
+
+<p>I have this experience frequently; usually I can figure out what's going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
+
+<p>It turns out that Active Record has a fairly unified choke-point for query execution on a per-model basis - <code>#find_by_sql</code>.  So, now that we know the method, what's the best way to add the debugger statement?  Well, we <em>could</em> just open up the gem code, but then we have to restart our console, and we run the risk of forgetting to remove the statement or otherwise screwing up the gem code in some way that's difficult to track down.  We could monkey patch the method, but even that sounds onerous, especially if we want the method to be usable again without hitting that debugger statement later in our session.</p>
+
+<p>Enter a relatively short addition to your <code>.irbrc</code> or <code>.pryrc</code>!  Simply add the following method:</p>
+
+<p>```ruby
+def add_debugger(clazz, method)
+  debugger_method = binding.respond_to?(:pry) ? 'binding.pry' : 'debugger'</p>
+
+<p>  unless clazz.method_defined? "#{method}_with_debugger"</p>
+
+<pre><code>clazz.class_eval &lt;&lt;-CODE, __FILE__, __LINE__ + 1
+  def #{method}_with_debugger(*args, &amp;block)
+    #{debugger_method}
+    #{method}_without_debugger(*args, &amp;block)
+  end
+  alias_method_chain :#{method}, :debugger
+CODE
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Note that my debugger preference is <code>pry</code>, if it's available.  You can of course adjust the above code per your preference.  Now we can simply run:</p>
+
+<p><code>ruby
+add_debugger MyModel.singleton_class, :find_by_sql
+</code></p>
+
+<p>Running through our problem code again, you should find yourself in the debugger for any queries on <code>MyModel</code>.  Once in the debugger, simply inspect <code>caller</code> to figure out what pesky bit of code is generating all of the extra queries.</p>
+
+<p>This is great, but it would incomplete if we had to restart the server in order to remove the debugger statement!  The following snippet should do the trick:</p>
+
+<p>```ruby
+def remove_debugger(clazz, method)
+  return unless clazz.method_defined? "#{method}_with_debugger"</p>
+
+<p>  clazz.class_eval do</p>
+
+<pre><code>alias_method method, "#{method}_without_debugger"
+undef_method "#{method}_with_debugger"
+undef_method "#{method}_without_debugger"
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Just run <code>remove_debugger MyModel.singleton_class, :find_by_sql</code>, and you're back to regular development.</p>
+
+<p>Now that you've got this method, adding debugging statements to your own code or 3rd party code is a breeze!</p>
+
+<p>Check out my <a href="https://github.com/a-warner/dotfiles/blob/master/.railsrc">.railsrc</a> for more little one-off development helper methods.</p>
+
+<p>Is there an easier way to do this with pry?  Is there a gem that just does this and makes my silly code obsolete?  Let me know in the comments!</p>
+]]></content>
+  </entry>
+  
+</feed>
