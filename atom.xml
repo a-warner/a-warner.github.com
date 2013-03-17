@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Andrew's Thoughts]]></title>
+  <link href="http://a-warner.github.com/atom.xml" rel="self"/>
+  <link href="http://a-warner.github.com/"/>
+  <updated>2013-03-17T17:42:42-04:00</updated>
+  <id>http://a-warner.github.com/</id>
+  <author>
+    <name><![CDATA[Andrew Warner]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
