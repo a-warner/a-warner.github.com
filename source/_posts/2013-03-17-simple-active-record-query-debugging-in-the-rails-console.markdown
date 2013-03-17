@@ -14,6 +14,8 @@ Stop me if this sounds familiar.  You're tooling around in the Rails console, te
 
 I have this experience frequently; usually I can figure out what's going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?
 
+<!-- more -->
+
 It turns out that Active Record has a fairly unified choke-point for query execution on a per-model basis - `#find_by_sql`.  So, now that we know the method, what's the best way to add the debugger statement?  Well, we *could* just open up the gem code, but then we have to restart our console, and we run the risk of forgetting to remove the statement or otherwise screwing up the gem code in some way that's difficult to track down.  We could monkey patch the method, but even that sounds onerous, especially if we want the method to be usable again without hitting that debugger statement later in our session.
 
 Enter a relatively short addition to your `.irbrc` or `.pryrc`!  Simply add the following method:
