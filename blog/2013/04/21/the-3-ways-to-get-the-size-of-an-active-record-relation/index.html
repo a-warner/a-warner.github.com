@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My first blog post - a-warner.github.io</title>
+  <title>The 3 Ways to Get the Size of an Active Record Relation - a-warner.github.io</title>
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="This is my first blog post! I setup up my blog using Octopress, which was incredibly easy. They&#8217;ve got some great guides on their site, but &hellip;">
+  <meta name="description" content="If you&#8217;re reading this and your first thought is, &#8220;there are 3 ways to get the size of a relation?&#8221;, then
+you&#8217;ve come to the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://a-warner.github.io/blog/2013/03/17/my-first-blog-post">
+  <link rel="canonical" href="http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="a-warner.github.io" type="application/atom+xml">
@@ -80,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">My First Blog Post</h1>
+      <h1 class="entry-title">The 3 Ways to Get the Size of an Active Record Relation</h1>
     
     
       <p class="meta">
@@ -96,27 +97,74 @@
   
 
 
-<time datetime="2013-03-17T18:07:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time datetime="2013-04-21T18:14:00-04:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>This is my first blog post! I setup up my blog using <a href="http://octopress.org/">Octopress</a>, which was incredibly easy.  They&#8217;ve got some great guides on their site, but just to give you a sense of exactly how easy it is, I simply:</p>
+<div class="entry-content"><p>If you&#8217;re reading this and your first thought is, &#8220;there are 3 ways to get the size of a relation?&#8221;, then
+you&#8217;ve come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
+want to know the size, you&#8217;ve got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
+might do the same thing, right?  Not so!  There are some key differences between them.</p>
 
-<ul>
-<li>Created a repository on github named a-warner.github.com - the standard naming conventions that <a href="http://pages.github.com/">Github Pages</a> expects if I want a-warner.github.com to resolve to this blog</li>
-<li>Cloned Octopress via <code>git clone git://github.com/imathis/octopress.git a-warner.github.com</code>, ran <code>bundle</code></li>
-<li>Next step was to run <code>rake setup_github_pages</code></li>
-<li>Then it&#8217;s as simple as <code>rake generate</code> and <code>rake deploy</code>!</li>
-<li>Creating this blog post just involved running <code>rake new_post["My first blog post"]</code></li>
-</ul>
+<!-- more -->
 
 
-<p>The writing process is extremely simple - just run <code>rake preview</code> until it looks right, and then <code>rake deploy</code> after committing your changes.</p>
+<p>TL;DR - use <code>size</code>, it usually &#8220;Does the Right Thing&#8221;</p>
 
-<p>Not that I should be surprised, but using Octopress is really a breeze, and I highly recommend it to anybody looking to crank out a quick blog with minimal setup and maintenance.</p>
+<p>First off, some background: both <code>Post.all</code> and <code>User.first.posts</code> are instances of <code>ActiveRecord::Relation</code>,
+a very sneaky and
+powerful class which manages lazy loading of records from the database. (full disclosure, <code>User.first.posts</code> is
+actually an instance of <code>ActiveRecord::Associations::CollectionProxy</code>, but the difference between the two isn&#8217;t
+really relevant to this article).  It makes a best effort to filter, and
+order records until the last possible minute when you actually ask for something concrete.  It&#8217;s that lazy loading
+which allows you to write code like <code>Post.where(featured: true).order(created_at: :desc).paginate(page: 1)</code>, which
+will generate only one query for the first page of posts.  If you want to get the size of a Relation, there are
+3 different ways to ask for it:</p>
+
+<h3>length</h3>
+
+<p>The simplest of the three methods, <code>length</code> is simply delegated to <code>to_a</code> on the collection; in other words, calling
+length is equivalent to calling <code>Post.all.to_a.length</code>.  It will query for ALL records, initialize ruby objects for
+all of them, and then get the size of the array.  Probably not what you want if you just want to display the count
+of the Posts on your blog!</p>
+
+<h3>count</h3>
+
+<p>Does a sql <code>count(*)</code> query for the count of the records in the database.  You probably want to use this method
+if you only ever need the count of the records in the association for whatever you&#8217;re doing.  In the example above,
+just displaying a count on the page is a perfect use case for <code>count</code>.</p>
+
+<h3>size</h3>
+
+<p>Size makes a best effort attempt to &#8220;Do The Right Thing&#8221; based on the current state of the collection.  Here is the
+actual source for size:</p>
+
+<p>From <a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/relation.rb#L205">ActiveRecord::Relation</a>:</p>
+
+<figure class='code'><figcaption><span>lib/active_record/relation.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Returns size of the records.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">size</span>
+</span><span class='line'>    <span class="n">loaded?</span> <span class="p">?</span> <span class="vi">@records</span><span class="o">.</span><span class="n">length</span> <span class="p">:</span> <span class="n">count</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Great comment by the way, I never would have known what <code>size</code> did without it.</p>
+
+<p>Basically, size is a heuristic switch between <code>length</code> and <code>count</code>.  If the collection is loaded, it just
+gets the length of the loaded array, otherwise it will hit the database with a query.  As pointed out in a
+<a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/associations/collection_proxy.rb#L677">much more informative comment which is for some reason in the CollectionProxy object instead</a>,
+you&#8217;ll end up with an extra query if you call <code>size</code> and then actually need the elements of the collection later.</p>
+
+<p>In a lot of cases the differences are completely irrelevant, but, for my money, <code>size</code> is the best of the 3 options.
+It does the best job of not leaking details about what&#8217;s going on under the hood in terms of lazy loading in Active
+Record.</p>
 </div>
 
 
@@ -139,15 +187,21 @@
   
 
 
-<time datetime="2013-03-17T18:07:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time datetime="2013-04-21T18:14:00-04:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/active-record/'>Active Record</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.io/blog/2013/03/17/my-first-blog-post/" data-via="wwarner" data-counturl="http://a-warner.github.io/blog/2013/03/17/my-first-blog-post/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/" data-via="wwarner" data-counturl="http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/" >Tweet</a>
   
   
   
@@ -158,8 +212,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/04/21/use-the-rails-router-for-routing/" title="Previous Post: Use the Rails Router for Routing!">&laquo; Use the Rails Router for Routing!</a>
       
-        <a class="basic-alignment right" href="/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" title="Next Post: Simple Active Record Query Debugging in the Rails Console">Simple Active Record Query Debugging in the Rails Console &raquo;</a>
       
     </p>
   </footer>
@@ -250,8 +304,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://a-warner.github.io/blog/2013/03/17/my-first-blog-post/';
-        var disqus_url = 'http://a-warner.github.io/blog/2013/03/17/my-first-blog-post/';
+        var disqus_identifier = 'http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/';
+        var disqus_url = 'http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/';
         var disqus_script = 'embed.js';
       
     (function () {

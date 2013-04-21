@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Active Record | Andrew's Thoughts]]></title>
-  <link href="http://a-warner.github.com/blog/categories/active-record/atom.xml" rel="self"/>
-  <link href="http://a-warner.github.com/"/>
-  <updated>2013-03-17T19:12:57-04:00</updated>
-  <id>http://a-warner.github.com/</id>
+  <title><![CDATA[Category: Active Record | a-warner.github.io]]></title>
+  <link href="http://a-warner.github.io/blog/categories/active-record/atom.xml" rel="self"/>
+  <link href="http://a-warner.github.io/"/>
+  <updated>2013-04-21T18:59:24-04:00</updated>
+  <id>http://a-warner.github.io/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
     
@@ -14,10 +14,77 @@
 
   
   <entry>
+    <title type="html"><![CDATA[The 3 Ways to Get the Size of an Active Record Relation]]></title>
+    <link href="http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/"/>
+    <updated>2013-04-21T18:14:00-04:00</updated>
+    <id>http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation</id>
+    <content type="html"><![CDATA[<p>If you're reading this and your first thought is, "there are 3 ways to get the size of a relation?", then
+you've come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
+want to know the size, you've got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
+might do the same thing, right?  Not so!  There are some key differences between them.</p>
+
+<!-- more -->
+
+
+<p>TL;DR - use <code>size</code>, it usually "Does the Right Thing"</p>
+
+<p>First off, some background: both <code>Post.all</code> and <code>User.first.posts</code> are instances of <code>ActiveRecord::Relation</code>,
+a very sneaky and
+powerful class which manages lazy loading of records from the database. (full disclosure, <code>User.first.posts</code> is
+actually an instance of <code>ActiveRecord::Associations::CollectionProxy</code>, but the difference between the two isn't
+really relevant to this article).  It makes a best effort to filter, and
+order records until the last possible minute when you actually ask for something concrete.  It's that lazy loading
+which allows you to write code like <code>Post.where(featured: true).order(created_at: :desc).paginate(page: 1)</code>, which
+will generate only one query for the first page of posts.  If you want to get the size of a Relation, there are
+3 different ways to ask for it:</p>
+
+<h3>length</h3>
+
+<p>The simplest of the three methods, <code>length</code> is simply delegated to <code>to_a</code> on the collection; in other words, calling
+length is equivalent to calling <code>Post.all.to_a.length</code>.  It will query for ALL records, initialize ruby objects for
+all of them, and then get the size of the array.  Probably not what you want if you just want to display the count
+of the Posts on your blog!</p>
+
+<h3>count</h3>
+
+<p>Does a sql <code>count(*)</code> query for the count of the records in the database.  You probably want to use this method
+if you only ever need the count of the records in the association for whatever you're doing.  In the example above,
+just displaying a count on the page is a perfect use case for <code>count</code>.</p>
+
+<h3>size</h3>
+
+<p>Size makes a best effort attempt to "Do The Right Thing" based on the current state of the collection.  Here is the
+actual source for size:</p>
+
+<p>From <a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/relation.rb#L205">ActiveRecord::Relation</a>:
+```ruby lib/active_record/relation.rb
+  # Returns size of the records.
+  def size</p>
+
+<pre><code>loaded? ? @records.length : count
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>Great comment by the way, I never would have known what <code>size</code> did without it.</p>
+
+<p>Basically, size is a heuristic switch between <code>length</code> and <code>count</code>.  If the collection is loaded, it just
+gets the length of the loaded array, otherwise it will hit the database with a query.  As pointed out in a
+<a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/associations/collection_proxy.rb#L677">much more informative comment which is for some reason in the CollectionProxy object instead</a>,
+you'll end up with an extra query if you call <code>size</code> and then actually need the elements of the collection later.</p>
+
+<p>In a lot of cases the differences are completely irrelevant, but, for my money, <code>size</code> is the best of the 3 options.
+It does the best job of not leaking details about what's going on under the hood in terms of lazy loading in Active
+Record.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Simple Active Record Query Debugging in the Rails Console]]></title>
-    <link href="http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
+    <link href="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
     <updated>2013-03-17T18:22:00-04:00</updated>
-    <id>http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
+    <id>http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
     <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You're tooling around in the Rails console, testing out some new code you're working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
 
 <p>I have this experience frequently; usually I can figure out what's going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>

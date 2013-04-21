@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Debugging | Andrew's Thoughts]]></title>
-  <link href="http://a-warner.github.com/blog/categories/debugging/atom.xml" rel="self"/>
-  <link href="http://a-warner.github.com/"/>
-  <updated>2013-03-17T19:12:57-04:00</updated>
-  <id>http://a-warner.github.com/</id>
+  <title><![CDATA[Category: Debugging | a-warner.github.io]]></title>
+  <link href="http://a-warner.github.io/blog/categories/debugging/atom.xml" rel="self"/>
+  <link href="http://a-warner.github.io/"/>
+  <updated>2013-04-21T18:59:24-04:00</updated>
+  <id>http://a-warner.github.io/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Simple Active Record Query Debugging in the Rails Console]]></title>
-    <link href="http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
+    <link href="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
     <updated>2013-03-17T18:22:00-04:00</updated>
-    <id>http://a-warner.github.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
+    <id>http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
     <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You're tooling around in the Rails console, testing out some new code you're working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
 
 <p>I have this experience frequently; usually I can figure out what's going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
