@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://a-warner.github.com/sitemap.xml 
+Sitemap: http://a-warner.github.io/sitemap.xml 
