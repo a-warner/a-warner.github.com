@@ -5,11 +5,20 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>a-warner.github.io</title>
+  <title>Use the Rails Router for Routing! - a-warner.github.io</title>
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="Check out the embedded git getpull article from Rap Genius below the fold! ">
+  <meta name="description" content="This is a quick one, and the title says most of it. Basically, you should never have code like this in
+your app: some_controller.rb1
+2
+3
+4
+5
+6
+7
+8
+9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +27,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://a-warner.github.com">
+  <link rel="canonical" href="http://a-warner.github.com/blog/2013/04/21/use-the-rails-router-for-routing">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="a-warner.github.io" type="application/atom+xml">
@@ -75,100 +84,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/">Git-getpull: Quickly Find the Pull Request That Merged Your Commit to Master</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-06T14:40:00-05:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Check out the embedded git getpull article from Rap Genius below the fold!</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/">The 3 Ways to Get the Size of an Active Record Relation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T18:14:00-04:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you&#8217;re reading this and your first thought is, &#8220;there are 3 ways to get the size of a relation?&#8221;, then
-you&#8217;ve come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
-want to know the size, you&#8217;ve got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
-might do the same thing, right?  Not so!  There are some key differences between them.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/21/use-the-rails-router-for-routing/">Use the Rails Router for Routing!</a></h1>
+      <h1 class="entry-title">Use the Rails Router for Routing!</h1>
     
     
       <p class="meta">
@@ -191,7 +112,7 @@ might do the same thing, right?  Not so!  There are some key differences between
   </header>
 
 
-  <div class="entry-content"><p>This is a quick one, and the title says most of it.  Basically, you should never have code like this in
+<div class="entry-content"><p>This is a quick one, and the title says most of it.  Basically, you should never have code like this in
 your app:</p>
 
 <figure class='code'><figcaption><span>some_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -219,70 +140,40 @@ your app:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<!-- more -->
+
+
+<p>The whole point of the router is to handle stuff about the url!  Instead, move whatever the logic inside
+<code>something_about_the_url?</code> does upstream to the router layer.  For example, say you want to display a different
+home page for www.mysite.com and blog.mysite.com.  This can be accomplished very easily using the router:</p>
+
+<figure class='code'><figcaption><span>routes.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">constraints</span> <span class="ss">subdomain</span><span class="p">:</span> <span class="s1">&#39;blog&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">root</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;blog#home&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">root</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;static#home&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that, in this specific case, you must have the subdomain route above the <code>root</code> route, otherwise the router
+will match the route to <code>static#home</code> before it gets to the subdomain constraint.  Remember that the router
+checks routes in order.  All set!</p>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/04/21/use-the-rails-router-for-routing/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/">Simple Active Record Query Debugging in the Rails Console</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Andrew Warner</span></span>
 
-<time datetime="2013-03-17T18:22:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Stop me if this sounds familiar.  You&#8217;re tooling around in the Rails console, testing out some new code you&#8217;re working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
-
-<p>I have this experience frequently; usually I can figure out what&#8217;s going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/17/my-first-blog-post/">My First Blog Post</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -294,40 +185,48 @@ your app:</p>
   
 
 
-<time datetime="2013-03-17T18:07:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-04-21T17:41:00-04:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>This is my first blog post! I setup up my blog using <a href="http://octopress.org/">Octopress</a>, which was incredibly easy.  They&#8217;ve got some great guides on their site, but just to give you a sense of exactly how easy it is, I simply:</p>
-
-<ul>
-<li>Created a repository on github named a-warner.github.com - the standard naming conventions that <a href="http://pages.github.com/">Github Pages</a> expects if I want a-warner.github.com to resolve to this blog</li>
-<li>Cloned Octopress via <code>git clone git://github.com/imathis/octopress.git a-warner.github.com</code>, ran <code>bundle</code></li>
-<li>Next step was to run <code>rake setup_github_pages</code></li>
-<li>Then it&#8217;s as simple as <code>rake generate</code> and <code>rake deploy</code>!</li>
-<li>Creating this blog post just involved running <code>rake new_post["My first blog post"]</code></li>
-</ul>
-
-
-<p>The writing process is extremely simple - just run <code>rake preview</code> until it looks right, and then <code>rake deploy</code> after committing your changes.</p>
-
-<p>Not that I should be surprised, but using Octopress is really a breeze, and I highly recommend it to anybody looking to crank out a quick blog with minimal setup and maintenance.</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.com/blog/2013/04/21/use-the-rails-router-for-routing/" data-via="wwarner" data-counturl="http://a-warner.github.com/blog/2013/04/21/use-the-rails-router-for-routing/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" title="Previous Post: Simple Active Record Query Debugging in the Rails Console">&laquo; Simple Active Record Query Debugging in the Rails Console</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/" title="Next Post: The 3 Ways to Get the Size of an Active Record Relation">The 3 Ways to Get the Size of an Active Record Relation &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -360,7 +259,7 @@ your app:</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/a-warner">@a-warner</a> on GitHub
@@ -393,6 +292,7 @@ your app:</p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -407,7 +307,10 @@ your app:</p>
       var disqus_shortname = 'andrewwarnerssthoughts';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://a-warner.github.com/blog/2013/04/21/use-the-rails-router-for-routing/';
+        var disqus_url = 'http://a-warner.github.com/blog/2013/04/21/use-the-rails-router-for-routing/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
