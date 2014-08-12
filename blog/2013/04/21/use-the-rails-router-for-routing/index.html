@@ -33,7 +33,7 @@ your app: some_controller.rb1
   <link href="/atom.xml" rel="alternate" title="a-warner.github.io" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -98,14 +98,7 @@ your app: some_controller.rb1
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T17:41:00-04:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+<time class='entry-date' datetime='2013-04-21T17:41:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:41 pm</span></time>
         
       </p>
     
@@ -178,19 +171,12 @@ checks routes in order.  All set!</p>
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2013-04-21T17:41:00-04:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
+<time class='entry-date' datetime='2013-04-21T17:41:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:41 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -199,7 +185,7 @@ checks routes in order.  All set!</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/" data-via="wwarner" data-counturl="http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/" data-via="wwarner" data-counturl="http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/" >Tweet</a>
   
   
   
@@ -234,6 +220,10 @@ checks routes in order.  All set!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/">Git-getpull: Quickly Find the Pull Request That Merged Your Commit to Master</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/">The 3 Ways to Get the Size of an Active Record Relation</a>
       </li>
     
@@ -246,7 +236,7 @@ checks routes in order.  All set!</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/03/17/my-first-blog-post/">My first blog post</a>
+        <a href="/blog/2013/03/17/my-first-blog-post/">My First Blog Post</a>
       </li>
     
   </ul>
@@ -292,7 +282,7 @@ checks routes in order.  All set!</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Andrew Warner -
+  Copyright &copy; 2014 - Andrew Warner -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -310,7 +300,7 @@ checks routes in order.  All set!</p>
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -335,7 +325,7 @@ checks routes in order.  All set!</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

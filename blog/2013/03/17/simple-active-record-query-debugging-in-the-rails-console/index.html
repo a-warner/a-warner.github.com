@@ -9,7 +9,7 @@
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="Stop me if this sounds familiar. You&#8217;re tooling around in the Rails console, testing out some new code you&#8217;re working on (or debugging &hellip;">
+  <meta name="description" content="Stop me if this sounds familiar. You&rsquo;re tooling around in the Rails console, testing out some new code you&rsquo;re working on (or debugging &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +24,7 @@
   <link href="/atom.xml" rel="alternate" title="a-warner.github.io" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -89,28 +89,21 @@
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2013-03-17T18:22:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time class='entry-date' datetime='2013-03-17T18:22:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>6:22 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Stop me if this sounds familiar.  You&#8217;re tooling around in the Rails console, testing out some new code you&#8217;re working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
+<div class="entry-content"><p>Stop me if this sounds familiar.  You&rsquo;re tooling around in the Rails console, testing out some new code you&rsquo;re working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
 
-<p>I have this experience frequently; usually I can figure out what&#8217;s going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
+<p>I have this experience frequently; usually I can figure out what&rsquo;s going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
 
 <!-- more -->
 
 
-<p>It turns out that Active Record has a fairly unified choke-point for query execution on a per-model basis - <code>#find_by_sql</code>.  So, now that we know the method, what&#8217;s the best way to add the debugger statement?  Well, we <em>could</em> just open up the gem code, but then we have to restart our console, and we run the risk of forgetting to remove the statement or otherwise screwing up the gem code in some way that&#8217;s difficult to track down.  We could monkey patch the method, but even that sounds onerous, especially if we want the method to be usable again without hitting that debugger statement later in our session.</p>
+<p>It turns out that Active Record has a fairly unified choke-point for query execution on a per-model basis - <code>#find_by_sql</code>.  So, now that we know the method, what&rsquo;s the best way to add the debugger statement?  Well, we <em>could</em> just open up the gem code, but then we have to restart our console, and we run the risk of forgetting to remove the statement or otherwise screwing up the gem code in some way that&rsquo;s difficult to track down.  We could monkey patch the method, but even that sounds onerous, especially if we want the method to be usable again without hitting that debugger statement later in our session.</p>
 
 <p>Enter a relatively short addition to your <code>.irbrc</code> or <code>.pryrc</code>!  Simply add the following method:</p>
 
@@ -143,7 +136,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Note that my debugger preference is <code>pry</code>, if it&#8217;s available.  You can of course adjust the above code per your preference.  Now we can simply run:</p>
+<p>Note that my debugger preference is <code>pry</code>, if it&rsquo;s available.  You can of course adjust the above code per your preference.  Now we can simply run:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">add_debugger</span> <span class="no">MyModel</span><span class="o">.</span><span class="n">singleton_class</span><span class="p">,</span> <span class="ss">:find_by_sql</span>
@@ -175,9 +168,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Just run <code>remove_debugger MyModel.singleton_class, :find_by_sql</code>, and you&#8217;re back to regular development.</p>
+<p>Just run <code>remove_debugger MyModel.singleton_class, :find_by_sql</code>, and you&rsquo;re back to regular development.</p>
 
-<p>Now that you&#8217;ve got this method, adding debugging statements to your own code or 3rd party code is a breeze!</p>
+<p>Now that you&rsquo;ve got this method, adding debugging statements to your own code or 3rd party code is a breeze!</p>
 
 <p>Check out my <a href="https://github.com/a-warner/dotfiles/blob/master/.railsrc">.railsrc</a> for more little one-off development helper methods.</p>
 
@@ -197,19 +190,12 @@
 
 
 
-
-
-
-
-  
-
-
-<time datetime="2013-03-17T18:22:00-04:00" pubdate data-updated="true">Mar 17<span>th</span>, 2013</time>
+<time class='entry-date' datetime='2013-03-17T18:22:00-04:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>6:22 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/active-record/'>Active Record</a>, <a class='category' href='/blog/categories/debugging/'>Debugging</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/active-record/'>active record</a>, <a class='category' href='/blog/categories/debugging/'>debugging</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -218,7 +204,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" data-via="wwarner" data-counturl="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" data-via="wwarner" data-counturl="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" >Tweet</a>
   
   
   
@@ -253,6 +239,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/">Git-getpull: Quickly Find the Pull Request That Merged Your Commit to Master</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/">The 3 Ways to Get the Size of an Active Record Relation</a>
       </li>
     
@@ -265,7 +255,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2013/03/17/my-first-blog-post/">My first blog post</a>
+        <a href="/blog/2013/03/17/my-first-blog-post/">My First Blog Post</a>
       </li>
     
   </ul>
@@ -311,7 +301,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Andrew Warner -
+  Copyright &copy; 2014 - Andrew Warner -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -329,7 +319,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -354,7 +344,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

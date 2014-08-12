@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | a-warner.github.io]]></title>
+  <title><![CDATA[Category: ruby | a-warner.github.io]]></title>
   <link href="http://a-warner.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://a-warner.github.io/"/>
-  <updated>2013-04-21T18:59:24-04:00</updated>
+  <updated>2014-08-12T18:22:03-04:00</updated>
   <id>http://a-warner.github.io/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -18,22 +18,22 @@
     <link href="http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/"/>
     <updated>2013-04-21T18:14:00-04:00</updated>
     <id>http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation</id>
-    <content type="html"><![CDATA[<p>If you're reading this and your first thought is, "there are 3 ways to get the size of a relation?", then
-you've come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
-want to know the size, you've got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
+    <content type="html"><![CDATA[<p>If you&rsquo;re reading this and your first thought is, &ldquo;there are 3 ways to get the size of a relation?&rdquo;, then
+you&rsquo;ve come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
+want to know the size, you&rsquo;ve got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
 might do the same thing, right?  Not so!  There are some key differences between them.</p>
 
 <!-- more -->
 
 
-<p>TL;DR - use <code>size</code>, it usually "Does the Right Thing"</p>
+<p>TL;DR - use <code>size</code>, it usually &ldquo;Does the Right Thing&rdquo;</p>
 
 <p>First off, some background: both <code>Post.all</code> and <code>User.first.posts</code> are instances of <code>ActiveRecord::Relation</code>,
 a very sneaky and
 powerful class which manages lazy loading of records from the database. (full disclosure, <code>User.first.posts</code> is
-actually an instance of <code>ActiveRecord::Associations::CollectionProxy</code>, but the difference between the two isn't
+actually an instance of <code>ActiveRecord::Associations::CollectionProxy</code>, but the difference between the two isn&rsquo;t
 really relevant to this article).  It makes a best effort to filter, and
-order records until the last possible minute when you actually ask for something concrete.  It's that lazy loading
+order records until the last possible minute when you actually ask for something concrete.  It&rsquo;s that lazy loading
 which allows you to write code like <code>Post.where(featured: true).order(created_at: :desc).paginate(page: 1)</code>, which
 will generate only one query for the first page of posts.  If you want to get the size of a Relation, there are
 3 different ways to ask for it:</p>
@@ -48,34 +48,31 @@ of the Posts on your blog!</p>
 <h3>count</h3>
 
 <p>Does a sql <code>count(*)</code> query for the count of the records in the database.  You probably want to use this method
-if you only ever need the count of the records in the association for whatever you're doing.  In the example above,
+if you only ever need the count of the records in the association for whatever you&rsquo;re doing.  In the example above,
 just displaying a count on the page is a perfect use case for <code>count</code>.</p>
 
 <h3>size</h3>
 
-<p>Size makes a best effort attempt to "Do The Right Thing" based on the current state of the collection.  Here is the
+<p>Size makes a best effort attempt to &ldquo;Do The Right Thing&rdquo; based on the current state of the collection.  Here is the
 actual source for size:</p>
 
 <p>From <a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/relation.rb#L205">ActiveRecord::Relation</a>:
-```ruby lib/active_record/relation.rb
+<code>ruby lib/active_record/relation.rb
   # Returns size of the records.
-  def size</p>
-
-<pre><code>loaded? ? @records.length : count
-</code></pre>
-
-<p>  end
-```</p>
+  def size
+    loaded? ? @records.length : count
+  end
+</code></p>
 
 <p>Great comment by the way, I never would have known what <code>size</code> did without it.</p>
 
 <p>Basically, size is a heuristic switch between <code>length</code> and <code>count</code>.  If the collection is loaded, it just
 gets the length of the loaded array, otherwise it will hit the database with a query.  As pointed out in a
 <a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/associations/collection_proxy.rb#L677">much more informative comment which is for some reason in the CollectionProxy object instead</a>,
-you'll end up with an extra query if you call <code>size</code> and then actually need the elements of the collection later.</p>
+you&rsquo;ll end up with an extra query if you call <code>size</code> and then actually need the elements of the collection later.</p>
 
 <p>In a lot of cases the differences are completely irrelevant, but, for my money, <code>size</code> is the best of the 3 options.
-It does the best job of not leaking details about what's going on under the hood in terms of lazy loading in Active
+It does the best job of not leaking details about what&rsquo;s going on under the hood in terms of lazy loading in Active
 Record.</p>
 ]]></content>
   </entry>
@@ -88,22 +85,18 @@ Record.</p>
     <content type="html"><![CDATA[<p>This is a quick one, and the title says most of it.  Basically, you should never have code like this in
 your app:</p>
 
-<p>```ruby some_controller.rb
-class SomeController &lt; ApplicationController
-  def some_action</p>
-
-<pre><code>if something_about_the_url?
-  do_something
-  render :template =&gt; :foo
-else
-  do_something_else
-  render :template =&gt; :baz
+<pre><code class="ruby some_controller.rb">class SomeController &lt; ApplicationController
+  def some_action
+    if something_about_the_url?
+      do_something
+      render :template =&gt; :foo
+    else
+      do_something_else
+      render :template =&gt; :baz
+    end
+  end
 end
 </code></pre>
-
-<p>  end
-end
-```</p>
 
 <!-- more -->
 
@@ -112,13 +105,12 @@ end
 <code>something_about_the_url?</code> does upstream to the router layer.  For example, say you want to display a different
 home page for www.mysite.com and blog.mysite.com.  This can be accomplished very easily using the router:</p>
 
-<p>```ruby routes.rb
-constraints subdomain: 'blog' do
+<pre><code class="ruby routes.rb">constraints subdomain: 'blog' do
   root to: 'blog#home'
-end</p>
+end
 
-<p>root to: 'static#home'
-```</p>
+root to: 'static#home'
+</code></pre>
 
 <p>Note that, in this specific case, you must have the subdomain route above the <code>root</code> route, otherwise the router
 will match the route to <code>static#home</code> before it gets to the subdomain constraint.  Remember that the router
@@ -131,64 +123,55 @@ checks routes in order.  All set!</p>
     <link href="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
     <updated>2013-03-17T18:22:00-04:00</updated>
     <id>http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
-    <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You're tooling around in the Rails console, testing out some new code you're working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
+    <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You&rsquo;re tooling around in the Rails console, testing out some new code you&rsquo;re working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
 
-<p>I have this experience frequently; usually I can figure out what's going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
+<p>I have this experience frequently; usually I can figure out what&rsquo;s going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
 
 <!-- more -->
 
 
-<p>It turns out that Active Record has a fairly unified choke-point for query execution on a per-model basis - <code>#find_by_sql</code>.  So, now that we know the method, what's the best way to add the debugger statement?  Well, we <em>could</em> just open up the gem code, but then we have to restart our console, and we run the risk of forgetting to remove the statement or otherwise screwing up the gem code in some way that's difficult to track down.  We could monkey patch the method, but even that sounds onerous, especially if we want the method to be usable again without hitting that debugger statement later in our session.</p>
+<p>It turns out that Active Record has a fairly unified choke-point for query execution on a per-model basis - <code>#find_by_sql</code>.  So, now that we know the method, what&rsquo;s the best way to add the debugger statement?  Well, we <em>could</em> just open up the gem code, but then we have to restart our console, and we run the risk of forgetting to remove the statement or otherwise screwing up the gem code in some way that&rsquo;s difficult to track down.  We could monkey patch the method, but even that sounds onerous, especially if we want the method to be usable again without hitting that debugger statement later in our session.</p>
 
 <p>Enter a relatively short addition to your <code>.irbrc</code> or <code>.pryrc</code>!  Simply add the following method:</p>
 
-<p>```ruby
-def add_debugger(clazz, method)
-  debugger_method = binding.respond_to?(:pry) ? 'binding.pry' : 'debugger'</p>
+<pre><code class="ruby">def add_debugger(clazz, method)
+  debugger_method = binding.respond_to?(:pry) ? 'binding.pry' : 'debugger'
 
-<p>  unless clazz.method_defined? "#{method}_with_debugger"</p>
-
-<pre><code>clazz.class_eval &lt;&lt;-CODE, __FILE__, __LINE__ + 1
-  def #{method}_with_debugger(*args, &amp;block)
-    #{debugger_method}
-    #{method}_without_debugger(*args, &amp;block)
+  unless clazz.method_defined? "#{method}_with_debugger"
+    clazz.class_eval &lt;&lt;-CODE, __FILE__, __LINE__ + 1
+      def #{method}_with_debugger(*args, &amp;block)
+        #{debugger_method}
+        #{method}_without_debugger(*args, &amp;block)
+      end
+      alias_method_chain :#{method}, :debugger
+    CODE
   end
-  alias_method_chain :#{method}, :debugger
-CODE
+end
 </code></pre>
 
-<p>  end
-end
-```</p>
+<p>Note that my debugger preference is <code>pry</code>, if it&rsquo;s available.  You can of course adjust the above code per your preference.  Now we can simply run:</p>
 
-<p>Note that my debugger preference is <code>pry</code>, if it's available.  You can of course adjust the above code per your preference.  Now we can simply run:</p>
-
-<p><code>ruby
-add_debugger MyModel.singleton_class, :find_by_sql
-</code></p>
+<pre><code class="ruby">add_debugger MyModel.singleton_class, :find_by_sql
+</code></pre>
 
 <p>Running through our problem code again, you should find yourself in the debugger for any queries on <code>MyModel</code>.  Once in the debugger, simply inspect <code>caller</code> to figure out what pesky bit of code is generating all of the extra queries.</p>
 
 <p>This is great, but it would incomplete if we had to restart the server in order to remove the debugger statement!  The following snippet should do the trick:</p>
 
-<p>```ruby
-def remove_debugger(clazz, method)
-  return unless clazz.method_defined? "#{method}_with_debugger"</p>
+<pre><code class="ruby">def remove_debugger(clazz, method)
+  return unless clazz.method_defined? "#{method}_with_debugger"
 
-<p>  clazz.class_eval do</p>
-
-<pre><code>alias_method method, "#{method}_without_debugger"
-undef_method "#{method}_with_debugger"
-undef_method "#{method}_without_debugger"
+  clazz.class_eval do
+    alias_method method, "#{method}_without_debugger"
+    undef_method "#{method}_with_debugger"
+    undef_method "#{method}_without_debugger"
+  end
+end
 </code></pre>
 
-<p>  end
-end
-```</p>
+<p>Just run <code>remove_debugger MyModel.singleton_class, :find_by_sql</code>, and you&rsquo;re back to regular development.</p>
 
-<p>Just run <code>remove_debugger MyModel.singleton_class, :find_by_sql</code>, and you're back to regular development.</p>
-
-<p>Now that you've got this method, adding debugging statements to your own code or 3rd party code is a breeze!</p>
+<p>Now that you&rsquo;ve got this method, adding debugging statements to your own code or 3rd party code is a breeze!</p>
 
 <p>Check out my <a href="https://github.com/a-warner/dotfiles/blob/master/.railsrc">.railsrc</a> for more little one-off development helper methods.</p>
 

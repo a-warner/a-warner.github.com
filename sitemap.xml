@@ -1,35 +1,51 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-        <loc>http://a-warner.github.io/blog/2013/03/17/my-first-blog-post/</loc>
-        <lastmod>2013-03-17T18:19:57-04:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/
-        </loc>
-        <lastmod>2013-03-17T19:12:24-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/</loc>
-        <lastmod>2013-04-21T18:11:40-04:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/
-        </loc>
-        <lastmod>2013-04-21T18:59:23-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://a-warner.github.io/blog/archives/</loc>
-        <lastmod>2013-04-21T18:59:23-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://a-warner.github.io/</loc>
-        <lastmod>2013-04-21T18:59:23-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://a-warner.github.io/robots.txt</loc>
-        <lastmod>2013-03-17T17:24:03-04:00</lastmod>
-    </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  
+  <url>
+    <loc>http://a-warner.github.io/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/</loc>
+    <lastmod>2014-03-06T14:40:00-05:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/</loc>
+    <lastmod>2013-04-21T18:14:00-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/</loc>
+    <lastmod>2013-04-21T17:41:00-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/</loc>
+    <lastmod>2013-03-17T18:22:00-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://a-warner.github.io/blog/2013/03/17/my-first-blog-post/</loc>
+    <lastmod>2013-03-17T18:07:00-04:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  
+  <url>
+    <loc>http://a-warner.github.io/blog/archives/</loc>
+    <lastmod>2014-08-12T18:22:03-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>http://a-warner.github.io/</loc>
+    <lastmod>2014-08-12T18:22:03-04:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  
 </urlset>
