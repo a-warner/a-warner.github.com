@@ -246,10 +246,13 @@ hgroup {
     &:visited, &:hover { color: $subtitle_color; }
   }
 
+  .photo-link {
+    width: 100%;
+  }
+
   .header-photo {
-    float: left;
-    display: inline-block;
-    margin-right: 20px;
+    margin: 0px auto;
+    display: block;
 
     width: 150px;
     height: 150px;
@@ -270,7 +273,17 @@ hgroup {
     font-family: $header-subtitle-font-family;
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 550px) {
     h3 { display: block; }
+
+    .photo-link {
+      width: auto;
+    }
+
+    .header-photo {
+      float: left;
+      display: inline-block;
+      margin-right: 20px;
+    }
   }
 }
