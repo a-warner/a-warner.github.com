@@ -205,16 +205,35 @@ aside {
   font-family: 'entypo-social';
 }
 
-nav .social-navigation {
+.social-container {
+  width: 100%;
+  .social-navigation {
+    text-align: center;
+  }
+}
+
+.social-navigation {
+  display: block;
   padding-top: .15em;
+
+  .name { display: none; }
+  .entypo-social {
+    font-size: 37px;
+  }
+
+  a {
+    margin-right: 7px;
+    padding: 0px 10px;
+  }
+}
+
+nav .social-navigation {
+  margin: 0;
   display: none;
   float: right;
 
   a {
-    padding: 0px 10px;
     margin: 0px 7px;
-
-    .name { display: none; }
   }
 
   .entypo-social {
@@ -222,23 +241,15 @@ nav .social-navigation {
   }
 }
 
-#footer .social-navigation {
-  float: none;
-  display: block;
-  .entypo-social { display: none; }
-  .name { display: inline; }
-  list-style: none;
-}
-
 @media only screen and (min-width: 600px) {
   nav .social-navigation {
     display: block;
   }
 
-  #footer .social-navigation { display: none; }
+  hgroup .social-navigation { display: none; }
 }
 
-hgroup {
+body header hgroup {
   a {
     text-decoration: none;
     color: $subtitle_color;
@@ -263,6 +274,11 @@ hgroup {
     @include border-radius(99em);
   }
 
+  h1, h2 {
+    width: 100%;
+    text-align: center;
+  }
+
   h3 {
     display: none;
     margin: .2em 0 0;
@@ -273,8 +289,12 @@ hgroup {
     font-family: $header-subtitle-font-family;
   }
 
-  @media only screen and (min-width: 550px) {
+  @media only screen and (min-width: 600px) {
     h3 { display: block; }
+    h1, h2 {
+      width: auto;
+      text-align: left;
+    }
 
     .photo-link {
       width: auto;
