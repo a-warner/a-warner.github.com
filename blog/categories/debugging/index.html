@@ -29,7 +29,8 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -46,12 +47,18 @@
 
 </head>
 
-<body   >
+<body    class="collapse-sidebar sidebar-footer" >
   <header role="banner"><hgroup>
+  <a class="photo-link" href="/about"><div class="header-photo" title="Andrew Warner"></div></a>
   <h1><a href="/">a-warner.github.io</a></h1>
-  
-    <h2>Random thoughts on programming and life</h2>
-  
+  <h2><a href="/about">Andrew Warner</a></h2>
+  <h3>Software Engineer and technology enthusiast <br> Director of Engineering at <a href="http://genius.com">Genius</a></h3>
+  <div class="social-navigation">
+  <a href="https://github.com/a-warner"><i class="entypo-social">&#62208;</i><span class="name">GitHub</span></a>
+  <a href="https://twitter.com/wwarner"><i class="entypo-social">&#62217;</i><span class="name">Twitter</span></a>
+  <a href="https://www.linkedin.com/in/andrewwarnerdev"><i class="entypo-social">&#62232;</i><span class="name">LinkedIn</span></a>
+</div>
+
 </hgroup>
 
 </header>
@@ -68,9 +75,15 @@
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
+<div class="social-navigation">
+  <a href="https://github.com/a-warner"><i class="entypo-social">&#62208;</i><span class="name">GitHub</span></a>
+  <a href="https://twitter.com/wwarner"><i class="entypo-social">&#62217;</i><span class="name">Twitter</span></a>
+  <a href="https://www.linkedin.com/in/andrewwarnerdev"><i class="entypo-social">&#62232;</i><span class="name">LinkedIn</span></a>
+</div>
+
 
 </nav>
   <div id="main">
@@ -177,9 +190,13 @@
 
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Andrew Warner -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  <footer role="contentinfo"><div class="footer-links">
+  <a href="/recent">Recent Posts</a>
+  <a href="/repos">GitHub Repos</a>
+</div>
+</p>
+<p>
+  Copyright &copy; 2014 - Andrew Warner
 </p>
 
 </footer>
