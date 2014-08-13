@@ -176,3 +176,62 @@ pre, .pre-code, html .gist .gist-file .gist-syntax .highlight pre, .highlight co
 aside {
 	display: none;
 }
+
+@font-face {
+    font-family: 'entypo';
+    src: url('/assets/fonts/entypo.eot');
+    src: url('/assets/fonts/entypo.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/entypo.woff') format('woff'),
+         url('/assets/fonts/entypo.ttf') format('truetype'),
+         url('/assets/fonts/entypo.svg#entypo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'entypo-social';
+    src: url('/assets/fonts/entypo-social.eot');
+    src: url('/assets/fonts/entypo-social.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/entypo-social.woff') format('woff'),
+         url('/assets/fonts/entypo-social.ttf') format('truetype'),
+         url('/assets/fonts/entypo-social.svg#entypo-social') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.entypo-social {
+  font-family: 'entypo-social';
+}
+
+.social-navigation {
+  display: none;
+  float: right;
+
+  li a {
+    padding: 0px 10px;
+
+    .name { display: none; }
+  }
+
+  .entypo-social {
+    font-size: 40px;
+  }
+}
+
+#footer .social-navigation {
+  float: none;
+  display: block;
+  .entypo-social { display: none; }
+  .name { display: inline; }
+  list-style: none;
+}
+
+@media only screen and (min-width: 600px) {
+  .social-navigation {
+    display: block;
+  }
+
+  #footer .social-navigation { display: none; }
+}

@@ -1,8 +1,11 @@
-<p class="footer-links">
-  <a href="/recent">Recent Posts</a>
-  <a href="/repos">GitHub Repos</a>
-</p>
-</p>
-<p>
-  Copyright &copy; {{ site.time | date: "%Y" }} - {{ site.author }}
-</p>
+<div id="footer">
+  <p class="footer-links">
+    <a href="/recent">Recent Posts</a>
+    <a href="/repos">GitHub Repos</a>
+  </p>
+  {% include custom/social_navigation.html %}
+  </p>
+  <p>
+    Copyright &copy; {{ site.time | date: "%Y" }} - {{ site.author }}
+  </p>
+</div>
