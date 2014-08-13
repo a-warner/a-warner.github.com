@@ -4,10 +4,10 @@
 
 url: http://a-warner.github.io
 title: a-warner.github.io
-subtitle: <a href="/about">Andrew Warner</a> <br> Software Engineer and technology enthusiast <br> Director of Engineering at <a href="http://genius.com">Genius</a>
+subtitle: Andrew Warner
 author: Andrew Warner
 simple_search: http://google.com/search
-description:
+description: Software Engineer and technology enthusiast <br> Director of Engineering at <a href="http://genius.com">Genius</a>
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in

@@ -259,4 +259,18 @@ hgroup {
     background-position: center center;
     @include border-radius(99em);
   }
+
+  h3 {
+    display: none;
+    margin: .2em 0 0;
+    @extend .sans;
+    font-size: 1em;
+    color: $subtitle-color;
+    font-weight: normal;
+    font-family: $header-subtitle-font-family;
+  }
+
+  @media only screen and (min-width: 600px) {
+    h3 { display: block; }
+  }
 }
