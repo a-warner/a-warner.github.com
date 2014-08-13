@@ -99,3 +99,5 @@ google_analytics_tracking_id: UA-39386705-1
 
 # Facebook Like
 facebook_like: true
+
+sidebar: collapse
