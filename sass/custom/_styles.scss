@@ -205,12 +205,14 @@ aside {
   font-family: 'entypo-social';
 }
 
-.social-navigation {
+nav .social-navigation {
+  padding-top: .15em;
   display: none;
   float: right;
 
-  li a {
+  a {
     padding: 0px 10px;
+    margin: 0px 7px;
 
     .name { display: none; }
   }
@@ -229,7 +231,7 @@ aside {
 }
 
 @media only screen and (min-width: 600px) {
-  .social-navigation {
+  nav .social-navigation {
     display: block;
   }
 
