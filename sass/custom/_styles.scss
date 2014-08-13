@@ -237,3 +237,18 @@ nav .social-navigation {
 
   #footer .social-navigation { display: none; }
 }
+
+hgroup {
+  a {
+    text-decoration: none;
+    color: $subtitle_color;
+
+    &:visited, &:hover { color: $subtitle_color; }
+  }
+
+  img {
+    float: left;
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
