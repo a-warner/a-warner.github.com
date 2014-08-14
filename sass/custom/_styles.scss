@@ -171,6 +171,8 @@ aside {
 	display: none;
 }
 
+body > nav a { text-shadow: none; }
+
 @font-face {
     font-family: 'entypo';
     src: url('/assets/fonts/entypo.eot');
