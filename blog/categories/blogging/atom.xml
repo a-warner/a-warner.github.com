@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blogging | Least Astonished]]></title>
   <link href="http://www.leastastonished.com/blog/categories/blogging/atom.xml" rel="self"/>
   <link href="http://www.leastastonished.com/"/>
-  <updated>2014-08-14T00:11:15-04:00</updated>
+  <updated>2014-08-14T18:52:50-04:00</updated>
   <id>http://www.leastastonished.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing LeastAstonished.com]]></title>
+    <link href="http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com/"/>
+    <updated>2014-08-14T18:36:59-04:00</updated>
+    <id>http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com</id>
+    <content type="html"><![CDATA[<p>As I&rsquo;ve <a href="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/">discussed previously</a>, my blog
+was recently in need of a serious overhaul. While GitHub is a great hosting platform for a static blog, I
+didn&rsquo;t love the url <a href="http://a-warner.github.io">http://a-warner.github.io</a>. I also needed a new name for the blog,
+because, out of laziness, I had also named the blog itself a-warner.github.io. (ew)</p>
+
+<p>I tried a ton of domain names, and finally settled on <a href="http://www.leastastonished.com">LeastAstonished.com</a>. One
+of my favorite programming idioms is the
+<a href="http://en.wikipedia.org/wiki/Principle_of_least_astonishment">Principle of Least Astonishment</a>, which says that
+the design of your code/website/anything should strive to astonish your users as little as possible. So I
+rebranded this website as &ldquo;Least Astonished&rdquo;, which gives me a cool sounding name that also happens to be a bit
+of an inside joke for programmers.</p>
+
+<p>Hopefully this rebrand and redesign will motivate me to provide a lot more interesting content in the coming months!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Choosing a new theme]]></title>

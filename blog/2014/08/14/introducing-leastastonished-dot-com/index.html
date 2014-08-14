@@ -5,20 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Use the Rails Router for Routing! - Least Astonished</title>
+  <title>Introducing LeastAstonished.com - Least Astonished</title>
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="This is a quick one, and the title says most of it. Basically, you should never have code like this in
-your app: some_controller.rb1
-2
-3
-4
-5
-6
-7
-8
-9 &hellip;">
+  <meta name="description" content="As I&rsquo;ve discussed previously, my blog
+was recently in need of a serious overhaul. While GitHub is a great hosting platform for a static blog, I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -27,7 +19,7 @@ your app: some_controller.rb1
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing">
+  <link rel="canonical" href="http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link href="/favicon.ico" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -103,7 +95,7 @@ your app: some_controller.rb1
   
   <header>
     
-      <h1 class="entry-title">Use the Rails Router for Routing!</h1>
+      <h1 class="entry-title">Introducing LeastAstonished.com</h1>
     
     
       <p class="meta">
@@ -112,64 +104,26 @@ your app: some_controller.rb1
 
 
 
-<time class='entry-date' datetime='2013-04-21T17:41:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:41 pm</span></time>
+<time class='entry-date' datetime='2014-08-14T18:36:59-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:36 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>This is a quick one, and the title says most of it.  Basically, you should never have code like this in
-your app:</p>
+<div class="entry-content"><p>As I&rsquo;ve <a href="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/">discussed previously</a>, my blog
+was recently in need of a serious overhaul. While GitHub is a great hosting platform for a static blog, I
+didn&rsquo;t love the url <a href="http://a-warner.github.io">http://a-warner.github.io</a>. I also needed a new name for the blog,
+because, out of laziness, I had also named the blog itself a-warner.github.io. (ew)</p>
 
-<figure class='code'><figcaption><span>some_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">SomeController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">some_action</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">something_about_the_url?</span>
-</span><span class='line'>      <span class="n">do_something</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:template</span> <span class="o">=&gt;</span> <span class="ss">:foo</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">do_something_else</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:template</span> <span class="o">=&gt;</span> <span class="ss">:baz</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>I tried a ton of domain names, and finally settled on <a href="http://www.leastastonished.com">LeastAstonished.com</a>. One
+of my favorite programming idioms is the
+<a href="http://en.wikipedia.org/wiki/Principle_of_least_astonishment">Principle of Least Astonishment</a>, which says that
+the design of your code/website/anything should strive to astonish your users as little as possible. So I
+rebranded this website as &ldquo;Least Astonished&rdquo;, which gives me a cool sounding name that also happens to be a bit
+of an inside joke for programmers.</p>
 
-
-<!-- more -->
-
-
-<p>The whole point of the router is to handle stuff about the url!  Instead, move whatever the logic inside
-<code>something_about_the_url?</code> does upstream to the router layer.  For example, say you want to display a different
-home page for www.mysite.com and blog.mysite.com.  This can be accomplished very easily using the router:</p>
-
-<figure class='code'><figcaption><span>routes.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">constraints</span> <span class="ss">subdomain</span><span class="p">:</span> <span class="s1">&#39;blog&#39;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">root</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;blog#home&#39;</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">root</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;static#home&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note that, in this specific case, you must have the subdomain route above the <code>root</code> route, otherwise the router
-will match the route to <code>static#home</code> before it gets to the subdomain constraint.  Remember that the router
-checks routes in order.  All set!</p>
+<p>Hopefully this rebrand and redesign will motivate me to provide a lot more interesting content in the coming months!</p>
 </div>
 
 
@@ -185,12 +139,12 @@ checks routes in order.  All set!</p>
 
 
 
-<time class='entry-date' datetime='2013-04-21T17:41:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:41 pm</span></time>
+<time class='entry-date' datetime='2014-08-14T18:36:59-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:36 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/blogging/'>blogging</a>
   
 </span>
 
@@ -199,7 +153,7 @@ checks routes in order.  All set!</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing/" data-via="wwarner" data-counturl="http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com/" data-via="wwarner" data-counturl="http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com/" >Tweet</a>
   
   
   
@@ -210,10 +164,8 @@ checks routes in order.  All set!</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/" title="Previous Post: Simple Active Record Query Debugging in the Rails Console">&laquo; Simple Active Record Query Debugging in the Rails Console</a>
+        <a class="basic-alignment left" href="/blog/2014/08/13/choosing-a-new-theme/" title="Previous Post: Choosing a new theme">&laquo; Choosing a new theme</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/" title="Next Post: The 3 Ways to Get the Size of an Active Record Relation">The 3 Ways to Get the Size of an Active Record Relation &raquo;</a>
       
     </p>
   </footer>
@@ -314,8 +266,8 @@ checks routes in order.  All set!</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing/';
-        var disqus_url = 'http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing/';
+        var disqus_identifier = 'http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com/';
+        var disqus_url = 'http://www.leastastonished.com/blog/2014/08/14/introducing-leastastonished-dot-com/';
         var disqus_script = 'embed.js';
       
     (function () {
