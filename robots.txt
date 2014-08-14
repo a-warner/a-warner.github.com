@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://a-warner.github.io/sitemap.xml 
+Sitemap: http://www.leastastonished.com/sitemap.xml 

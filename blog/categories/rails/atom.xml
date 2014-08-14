@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rails | a-warner.github.io]]></title>
-  <link href="http://a-warner.github.io/blog/categories/rails/atom.xml" rel="self"/>
-  <link href="http://a-warner.github.io/"/>
-  <updated>2014-08-13T22:35:45-04:00</updated>
-  <id>http://a-warner.github.io/</id>
+  <title><![CDATA[Category: rails | Least Astonished]]></title>
+  <link href="http://www.leastastonished.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://www.leastastonished.com/"/>
+  <updated>2014-08-13T23:10:00-04:00</updated>
+  <id>http://www.leastastonished.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The 3 Ways to Get the Size of an Active Record Relation]]></title>
-    <link href="http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/"/>
+    <link href="http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/"/>
     <updated>2013-04-21T18:14:00-04:00</updated>
-    <id>http://a-warner.github.io/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation</id>
+    <id>http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation</id>
     <content type="html"><![CDATA[<p>If you&rsquo;re reading this and your first thought is, &ldquo;there are 3 ways to get the size of a relation?&rdquo;, then
 you&rsquo;ve come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
 want to know the size, you&rsquo;ve got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
@@ -79,9 +79,9 @@ Record.</p>
   
   <entry>
     <title type="html"><![CDATA[Use the Rails Router for Routing!]]></title>
-    <link href="http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing/"/>
+    <link href="http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing/"/>
     <updated>2013-04-21T17:41:00-04:00</updated>
-    <id>http://a-warner.github.io/blog/2013/04/21/use-the-rails-router-for-routing</id>
+    <id>http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing</id>
     <content type="html"><![CDATA[<p>This is a quick one, and the title says most of it.  Basically, you should never have code like this in
 your app:</p>
 
@@ -120,9 +120,9 @@ checks routes in order.  All set!</p>
   
   <entry>
     <title type="html"><![CDATA[Simple Active Record Query Debugging in the Rails Console]]></title>
-    <link href="http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
+    <link href="http://www.leastastonished.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
     <updated>2013-03-17T18:22:00-04:00</updated>
-    <id>http://a-warner.github.io/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
+    <id>http://www.leastastonished.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
     <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You&rsquo;re tooling around in the Rails console, testing out some new code you&rsquo;re working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
 
 <p>I have this experience frequently; usually I can figure out what&rsquo;s going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
