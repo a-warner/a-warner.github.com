@@ -4,7 +4,7 @@
   <title><![CDATA[Least Astonished]]></title>
   <link href="http://www.leastastonished.com/atom.xml" rel="self"/>
   <link href="http://www.leastastonished.com/"/>
-  <updated>2014-08-13T23:15:05-04:00</updated>
+  <updated>2014-08-14T00:01:31-04:00</updated>
   <id>http://www.leastastonished.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -12,6 +12,80 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Choosing a New Theme]]></title>
+    <link href="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/"/>
+    <updated>2014-08-13T23:25:46-04:00</updated>
+    <id>http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme</id>
+    <content type="html"><![CDATA[<p>About a week ago I finally decided that I wanted to start blogging again. I love talking about programming, but I often find it
+difficult to motivate myself to write a blog post about it. I sat down to write a post, and sure enough, I couldn&rsquo;t think of anything
+to blog about. So instead I procrastinated by thinking about all of the things I wanted to do to make my blog better.</p>
+
+<!-- more -->
+
+
+<p>The most obvious problem was that I was still using the default <a href="https://github.com/imathis/octopress">Octopress</a> theme.
+It has a lot of nice qualities: it&rsquo;s easy to navigate around, easy to read, and it&rsquo;s responsive! Unfortunately,
+using the default theme meant that my site also looked exactly like
+<a href="https://github.com/imathis/octopress/wiki/Octopress-Sites">everyone else&rsquo;s</a>.</p>
+
+<p>Now Octopress is also great because it&rsquo;s extremely easy for anyone to make a theme. In fact, a
+<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">bunch of people</a> have already done exactly that. Looking at the
+list of themes, though, I realized that it was difficult to tell which ones were &ldquo;the good ones.&rdquo; Normally when I have a huge list of
+products that I want to comb through, I&rsquo;m on a website where I can easily sort by some metadata about the product. (e.g. Amazon)
+My preferred sort is always by popularity: I basically trust the wisdom of the crowd. On Amazon, for example, I&rsquo;m much more interested
+in the product with the most reviews than I am in the product with the best average review. Unfortunately, GitHub tables have no such
+convenient sorting options!</p>
+
+<p>Luckily, I&rsquo;m a programmer, and, wanting to procrastinate more, I decided that I wanted to write a quick script to sort projects by
+number of stars. As it turns out, it&rsquo;s pretty simple to use <a href="http://nokogiri.org/">Nokogiri</a> and <a href="https://github.com/octokit/octokit.rb">Octokit</a> to get the information I want:</p>
+
+<div><script src='https://gist.github.com/60afe3ffdd0872719247.js'></script>
+<noscript><pre><code>require 'nokogiri'
+require 'octokit'
+require 'open-uri'
+
+github = Octokit::Client.new(:access_token =&gt; ENV['GH_TOKEN'])
+
+doc = Nokogiri::HTML.fragment(open('https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes').read)
+
+doc.search('table tr td:first a:first').map do |a|
+  a['href'] =~ %r{https?://github.com/([^/]+)/([^?/]+)(\?|$|/)} &amp;&amp; [$1, $2]
+end.compact.map do |owner, repo_name|
+  begin
+    github.repository(:owner =&gt; owner, :name =&gt; repo_name)
+  rescue Octokit::NotFound
+  end
+end.compact.sort_by { |repo| -repo.stargazers_count }.each do |repo|
+  puts &quot;#{repo.html_url} - #{repo.stargazers_count}&quot;
+end</code></pre></noscript></div>
+
+
+<p>This script simply:</p>
+
+<ul>
+<li>scrapes the <a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">themes page</a></li>
+<li>parses it with Nokogiri</li>
+<li>finds the table with the themes</li>
+<li>selects the link from the first column of each row, which is the link to the theme repository on GitHub</li>
+<li>extracts the owner and repo name using a &ldquo;simple&rdquo; regular expression</li>
+<li>maps owner/repo to number of stars</li>
+<li>prints a sorted list of repo links and stars</li>
+</ul>
+
+
+<p>and voila, we have an Amazon-like sort by popular-type situation. (check out the results in the <a href="https://gist.github.com/a-warner/60afe3ffdd0872719247">gist comments</a>)</p>
+
+<p>After checking out the popular themes, I decided, contrary to my usual shopping strategy, that I wasn&rsquo;t in love with any of them.
+I was looking for something simple, single-column, and easy to read. I ended up settling on
+<a href="https://github.com/mjhea0/whiterspace">whiterspace</a>, which, even though it only had 45 stars, was exactly what I was looking for.</p>
+
+<p>So, while I didn&rsquo;t end up choosing the most popular theme, it was still useful to be able to look at a mapping of themes to popularity.
+In the end, whiterspace got one more star, and I got a cleaner, more distinct-looking blog. Oh, and in doing all of this work, I ended up with a
+somewhat interesting topic to blog about (I hope!), accomplishing my original goal in a somewhat roundabout way. Win win win!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git-getpull: Quickly Find the Pull Request That Merged Your Commit to Master]]></title>

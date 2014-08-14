@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>The 3 Ways to Get the Size of an Active Record Relation - Least Astonished</title>
+  <title>Choosing a New Theme - Least Astonished</title>
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="If you&rsquo;re reading this and your first thought is, &ldquo;there are 3 ways to get the size of a relation?&rdquo;, then
-you&rsquo;ve come to the &hellip;">
+  <meta name="description" content="About a week ago I finally decided that I wanted to start blogging again. I love talking about programming, but I often find it
+difficult to motivate &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ you&rsquo;ve come to the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation">
+  <link rel="canonical" href="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link href="/favicon.ico" rel="icon" type="image/x-icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -95,7 +95,7 @@ you&rsquo;ve come to the &hellip;">
   
   <header>
     
-      <h1 class="entry-title">The 3 Ways to Get the Size of an Active Record Relation</h1>
+      <h1 class="entry-title">Choosing a New Theme</h1>
     
     
       <p class="meta">
@@ -104,74 +104,79 @@ you&rsquo;ve come to the &hellip;">
 
 
 
-<time class='entry-date' datetime='2013-04-21T18:14:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>6:14 pm</span></time>
+<time class='entry-date' datetime='2014-08-13T23:25:46-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:25 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>If you&rsquo;re reading this and your first thought is, &ldquo;there are 3 ways to get the size of a relation?&rdquo;, then
-you&rsquo;ve come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
-want to know the size, you&rsquo;ve got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
-might do the same thing, right?  Not so!  There are some key differences between them.</p>
+<div class="entry-content"><p>About a week ago I finally decided that I wanted to start blogging again. I love talking about programming, but I often find it
+difficult to motivate myself to write a blog post about it. I sat down to write a post, and sure enough, I couldn&rsquo;t think of anything
+to blog about. So instead I procrastinated by thinking about all of the things I wanted to do to make my blog better.</p>
 
 <!-- more -->
 
 
-<p>TL;DR - use <code>size</code>, it usually &ldquo;Does the Right Thing&rdquo;</p>
+<p>The most obvious problem was that I was still using the default <a href="https://github.com/imathis/octopress">Octopress</a> theme.
+It has a lot of nice qualities: it&rsquo;s easy to navigate around, easy to read, and it&rsquo;s responsive! Unfortunately,
+using the default theme meant that my site also looked exactly like
+<a href="https://github.com/imathis/octopress/wiki/Octopress-Sites">everyone else&rsquo;s</a>.</p>
 
-<p>First off, some background: both <code>Post.all</code> and <code>User.first.posts</code> are instances of <code>ActiveRecord::Relation</code>,
-a very sneaky and
-powerful class which manages lazy loading of records from the database. (full disclosure, <code>User.first.posts</code> is
-actually an instance of <code>ActiveRecord::Associations::CollectionProxy</code>, but the difference between the two isn&rsquo;t
-really relevant to this article).  It makes a best effort to filter, and
-order records until the last possible minute when you actually ask for something concrete.  It&rsquo;s that lazy loading
-which allows you to write code like <code>Post.where(featured: true).order(created_at: :desc).paginate(page: 1)</code>, which
-will generate only one query for the first page of posts.  If you want to get the size of a Relation, there are
-3 different ways to ask for it:</p>
+<p>Now Octopress is also great because it&rsquo;s extremely easy for anyone to make a theme. In fact, a
+<a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">bunch of people</a> have already done exactly that. Looking at the
+list of themes, though, I realized that it was difficult to tell which ones were &ldquo;the good ones.&rdquo; Normally when I have a huge list of
+products that I want to comb through, I&rsquo;m on a website where I can easily sort by some metadata about the product. (e.g. Amazon)
+My preferred sort is always by popularity: I basically trust the wisdom of the crowd. On Amazon, for example, I&rsquo;m much more interested
+in the product with the most reviews than I am in the product with the best average review. Unfortunately, GitHub tables have no such
+convenient sorting options!</p>
 
-<h3>length</h3>
+<p>Luckily, I&rsquo;m a programmer, and, wanting to procrastinate more, I decided that I wanted to write a quick script to sort projects by
+number of stars. As it turns out, it&rsquo;s pretty simple to use <a href="http://nokogiri.org/">Nokogiri</a> and <a href="https://github.com/octokit/octokit.rb">Octokit</a> to get the information I want:</p>
 
-<p>The simplest of the three methods, <code>length</code> is simply delegated to <code>to_a</code> on the collection; in other words, calling
-length is equivalent to calling <code>Post.all.to_a.length</code>.  It will query for ALL records, initialize ruby objects for
-all of them, and then get the size of the array.  Probably not what you want if you just want to display the count
-of the Posts on your blog!</p>
+<div><script src='https://gist.github.com/60afe3ffdd0872719247.js'></script>
+<noscript><pre><code>require 'nokogiri'
+require 'octokit'
+require 'open-uri'
 
-<h3>count</h3>
+github = Octokit::Client.new(:access_token =&gt; ENV['GH_TOKEN'])
 
-<p>Does a sql <code>count(*)</code> query for the count of the records in the database.  You probably want to use this method
-if you only ever need the count of the records in the association for whatever you&rsquo;re doing.  In the example above,
-just displaying a count on the page is a perfect use case for <code>count</code>.</p>
+doc = Nokogiri::HTML.fragment(open('https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes').read)
 
-<h3>size</h3>
-
-<p>Size makes a best effort attempt to &ldquo;Do The Right Thing&rdquo; based on the current state of the collection.  Here is the
-actual source for size:</p>
-
-<p>From <a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/relation.rb#L205">ActiveRecord::Relation</a>:</p>
-
-<figure class='code'><figcaption><span>lib/active_record/relation.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Returns size of the records.</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">size</span>
-</span><span class='line'>    <span class="n">loaded?</span> <span class="p">?</span> <span class="vi">@records</span><span class="o">.</span><span class="n">length</span> <span class="p">:</span> <span class="n">count</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+doc.search('table tr td:first a:first').map do |a|
+  a['href'] =~ %r{https?://github.com/([^/]+)/([^?/]+)(\?|$|/)} &amp;&amp; [$1, $2]
+end.compact.map do |owner, repo_name|
+  begin
+    github.repository(:owner =&gt; owner, :name =&gt; repo_name)
+  rescue Octokit::NotFound
+  end
+end.compact.sort_by { |repo| -repo.stargazers_count }.each do |repo|
+  puts &quot;#{repo.html_url} - #{repo.stargazers_count}&quot;
+end</code></pre></noscript></div>
 
 
-<p>Great comment by the way, I never would have known what <code>size</code> did without it.</p>
+<p>This script simply:</p>
 
-<p>Basically, size is a heuristic switch between <code>length</code> and <code>count</code>.  If the collection is loaded, it just
-gets the length of the loaded array, otherwise it will hit the database with a query.  As pointed out in a
-<a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/associations/collection_proxy.rb#L677">much more informative comment which is for some reason in the CollectionProxy object instead</a>,
-you&rsquo;ll end up with an extra query if you call <code>size</code> and then actually need the elements of the collection later.</p>
+<ul>
+<li>scrapes the <a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">themes page</a></li>
+<li>parses it with Nokogiri</li>
+<li>finds the table with the themes</li>
+<li>selects the link from the first column of each row, which is the link to the theme repository on GitHub</li>
+<li>extracts the owner and repo name using a &ldquo;simple&rdquo; regular expression</li>
+<li>maps owner/repo to number of stars</li>
+<li>prints a sorted list of repo links and stars</li>
+</ul>
 
-<p>In a lot of cases the differences are completely irrelevant, but, for my money, <code>size</code> is the best of the 3 options.
-It does the best job of not leaking details about what&rsquo;s going on under the hood in terms of lazy loading in Active
-Record.</p>
+
+<p>and voila, we have an Amazon-like sort by popular-type situation. (check out the results in the <a href="https://gist.github.com/a-warner/60afe3ffdd0872719247">gist comments</a>)</p>
+
+<p>After checking out the popular themes, I decided, contrary to my usual shopping strategy, that I wasn&rsquo;t in love with any of them.
+I was looking for something simple, single-column, and easy to read. I ended up settling on
+<a href="https://github.com/mjhea0/whiterspace">whiterspace</a>, which, even though it only had 45 stars, was exactly what I was looking for.</p>
+
+<p>So, while I didn&rsquo;t end up choosing the most popular theme, it was still useful to be able to look at a mapping of themes to popularity.
+In the end, whiterspace got one more star, and I got a cleaner, more distinct-looking blog. Oh, and in doing all of this work, I ended up with a
+somewhat interesting topic to blog about (I hope!), accomplishing my original goal in a somewhat roundabout way. Win win win!</p>
 </div>
 
 
@@ -187,12 +192,12 @@ Record.</p>
 
 
 
-<time class='entry-date' datetime='2013-04-21T18:14:00-04:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>6:14 pm</span></time>
+<time class='entry-date' datetime='2014-08-13T23:25:46-04:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>11:25 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/active-record/'>active record</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/blogging/'>blogging</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -201,7 +206,7 @@ Record.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/" data-via="wwarner" data-counturl="http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/" data-via="wwarner" data-counturl="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/" >Tweet</a>
   
   
   
@@ -212,10 +217,8 @@ Record.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/04/21/use-the-rails-router-for-routing/" title="Previous Post: Use the Rails Router for Routing!">&laquo; Use the Rails Router for Routing!</a>
+        <a class="basic-alignment left" href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/" title="Previous Post: Git-getpull: Quickly find the pull request that merged your commit to master">&laquo; Git-getpull: Quickly find the pull request that merged your commit to master</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/" title="Next Post: Git-getpull: Quickly find the pull request that merged your commit to master">Git-getpull: Quickly find the pull request that merged your commit to master &raquo;</a>
       
     </p>
   </footer>
@@ -314,8 +317,8 @@ Record.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/';
-        var disqus_url = 'http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/';
+        var disqus_identifier = 'http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/';
+        var disqus_url = 'http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/';
         var disqus_script = 'embed.js';
       
     (function () {
