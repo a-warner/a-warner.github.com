@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Beware the Comment Siren Song"
+title: "Beware the Siren Song of Comments"
 date: 2014-08-20 08:53:27 -0400
 comments: true
 categories:
