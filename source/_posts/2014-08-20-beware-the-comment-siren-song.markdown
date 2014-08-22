@@ -8,35 +8,26 @@ categories:
 - Programming
 ---
 
-Developers love comments! They love documenting their code, leaving little reminders that explain some
+Developers love comments! They love documenting their code, leaving little comment breadcrumbs that explain some
 tricky section of code, or leaving a reminder for their later self. Everyone who writes these comments thinks
 that they're making a [pareto improvement](http://en.wikipedia.org/wiki/Pareto_efficiency) to the codebase, when,
 in fact, it's quite the opposite. Comments are especially dangerous because there are many situations where it
 *seems* like a comment will help, but beware the siren's call!
 
 Comments decay. They aren't compiled, and they'll never get executed at runtime. If they become out of date or
-incorrect, no test is going to fail and no user is going to complain to get you to fix them.
+incorrect, no test is going to fail and no user is going to complain.
 Programmers work around them out of fear that "somebody might need this comment or it might provide some value
 in the future", pushing them along far after they're useful. (if you can even argue that they were useful in
 the first place)
 
-To be clear, I don't have a problem with all comments. If, for example, you're writing a public API for
-a library that's getting exported to the world, or to a bunch of developers at your company, it may be
-easiest to maintain the documentation for that API in code comments. In other words, if you're making a
-conscious decision to document a library thoroughly, you might find that it's most convenient to keep that
-documentation close to the code. In that case, you should have some kind of process around making sure that
-the documentation remains up to date when you make breaking API changes. You should also be able to easily
-generate structured documentation from those code comments.  ([RDoc](http://rdoc.sourceforge.net/) for Ruby
-is one simple example)
-
-Enough bloviating, let's check out some examples! Here are some concrete uses of comments that I've seen a lot,
-and how they can be easily avoided.
+I hate reading articles that make abstract arguments, so, enough bloviating, let's check out some examples.
+Here are some concrete uses of comments that I've seen a lot, and how they can be easily avoided.
 
 ### Reminder / TODO
 
 Reminders belong somewhere besides your source code. Writing `TODO` or `FIXME` somewhere in the codebase creates
 a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
-TODO is that that "someone will surely see this code and proactively delete it", but the reality is that will
+TODO is that that "someone will surely see this code and proactively delete it", but in reality that will
 never happen. Every time someone goes into that section of the code, they're in there for some other purpose
 and they're going to ignore your TODO. This is especially true on bigger teams.
 
@@ -46,7 +37,7 @@ Example:
 require 'mylibrary/railtie' if defined?(Rails) # TODO: older rails support!
 ```
 
-Realistically, when is that TODO every going to get done? Practical suggestion: use the wonderful
+Realistically, when is that TODO ever going to get done? Instead of writing a comment, use the
 [doby](https://github.com/andyw8/do_by) library, or roll your own expiring todos.
 
 ```ruby
@@ -77,8 +68,10 @@ end
 ```
 
 So that comment helpfully explains that `ActiveRecord` will halt saving a model if one of the callbacks returns
-false. So, we have to return nil instead. So how can we explain this without a comment? Why not just write a
-helpful method which explains what's going on, and can be easily reused?
+`false`. So, we have to return nil instead. Whenever you're tempted to comment your code to explain what's going on,
+the code isn't clear enough. Your goal should be to make the code readable on its own.
+So how can we make this section clearer without a comment? Why not just write a helpful method which explains
+what's going on, and can be easily reused?
 
 ```ruby
 ActiveRecord::Base.class_eval do
@@ -107,26 +100,25 @@ and [lift all boats](http://en.wikipedia.org/wiki/A_rising_tide_lifts_all_boats)
 
 ### Explaining some performance hack
 
-Ok, most of the time you can write readable code and not worry about performance, but sometimes performance
+Most of the time you can write readable code and not worry about performance, but sometimes performance
 actually matters. When you have to write a performance hack, you might have an urge to write a comment explaining
 why. The instinct to want to document your performance hack is the right one, but a comment is the wrong place.
 Why? Because the hacky code might get modified, removed, or moved somewhere else, and the person who does that has to
 remember to update the comment too. The comment will never "break" and force you to fix it if the behavior of the
-hack changes, it will just stick around to confuse future programmers in perpetuity.
+hack changes, it will just stick around to confuse future programmers.
 
-The right place to document hacks is a commit message. Why a commit message?
-It is easily accessible (with the right tooling) to programmers wanting to edit the code, but it doesn't make
-the code harder to read. If your source control history isn't easily accessible to programmers, then you need
+The right place to document hacks is a commit message. A commit message is easily accessible
+(with the right tooling) to programmers wanting to edit the code, but it doesn't clog up the code and make
+it harder to read. If your source control history isn't easily accessible to programmers, then you need
 better tooling. I use [fugitive.vim](https://github.com/tpope/vim-fugitive) to easily `git blame` any line that
-I want to know more about. Combined with
+I want to know more about. In concert with
 [git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/),
 I'm never more that a few quick commands away from figuring out exactly why a line was written in a certain way.
 Commit messages will never become out of date, because if the line that they're modifying gets deleted or modified, the commit message gets automatically "removed" from your immediate view in `git blame`.
 
-
 ### Old code you want to keep around
 
-This is by far the worst commenting infraction of them all! You might see a comment like:
+This is by far the worst commenting infraction! You might see a comment like:
 
 ```ruby
 # def reslug_all_tag_pages
@@ -140,7 +132,7 @@ end
 
 "Keeping around old code you might want to use later" is *exactly* what source control is. If you want
 to resurrect some old code, you can do so easily with git as long as you can remember some part of the
-code. Let's say you want to resurrect a method called `reslug_all_tag_pages`. Just use:
+code. Let's say you want to resurrect this `reslug_all_tag_pages` method. Just use:
 
 ```sh
 $ git log -Sreslug_all_tag_pages
@@ -150,7 +142,7 @@ and that will find all commits that added or deleted a line including that strin
 
 ### Automatically generated comments
 
-These are the worst! It's less common in the world of dynamic languages, but the most popular IDEs for compiled
+It's less common in the world of dynamic languages, but the most popular IDEs for compiled
 languages tend to pepper the codebase with these useless automatically generated strings. They generate these
 comments to remind programmers to document their APIs, but I've frequently seen developers commit
 the automatically generated documentation on a method or class without modification. Some examples:
@@ -187,3 +179,21 @@ public class MyList<E> extends ArrayList<E> {
 
 The generated comments do nothing but clutter up the code, making it more difficult for the reader to scroll
 through the class and figure out what the code is doing.
+
+
+### Is there ever a reason to write a comment?
+
+To be clear, I don't have a problem with all comments. If, for example, you're writing a public API for
+a library that's getting exported to the world, or to a bunch of developers at your company, it may be
+easiest to maintain the documentation for that API in code comments. In other words, if you're making a
+conscious decision to document a library thoroughly, you might find that it's most convenient to keep that
+documentation close to the code. In that case, you should have some kind of process around making sure that
+the documentation remains up to date when you make breaking API changes. You should also be able to easily
+generate structured documentation from those code comments.  ([RDoc](http://rdoc.sourceforge.net/) for Ruby
+is one simple example)
+
+### Leave 'em out
+
+So now that I've covered all of these examples, you don't have any excuse to write comments. Give these
+methods a try, and I promise you'll have a cleaner codebase that's easier to maintain. Is there a good reason
+to write a comment that I've missed? Let me know in the comments!
