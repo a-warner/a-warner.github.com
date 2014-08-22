@@ -152,7 +152,7 @@ def something_else_thats_actually_being_used
 end
 ```
 
-"Keeping around old code you might want to use later" is *exactly* what source control is. If you want
+"Keeping around old code you might want to use later" is *exactly* what source control is for. If you want
 to resurrect some old code, you can do so easily with git as long as you can remember some part of the
 code. Let's say you want to resurrect this `reslug_all_tag_pages` method. Just use:
 
