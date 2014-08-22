@@ -58,7 +58,7 @@ This method sets a specific due date for the `TODO`, and, unlike a regular comme
 and blows up if you haven't removed it before the due date! (buyer beware: you probably only want this behavior
 in dev!)
 
-### Explaining why code is doing something
+### Explaining why code is written a certain way
 
 Another tempting moment when you want to write a comment is to explain some code that isn't 100% intuitive. Let's
 take a practical example from the [Genius](http://genius.com) codebase:
@@ -105,10 +105,24 @@ Now we have the same amount of information, and a reusable method that explains 
 `ActiveRecord` changes its behavior, and returning nil suddenly starts halting save, we can change this method
 and [lift all boats](http://en.wikipedia.org/wiki/A_rising_tide_lifts_all_boats).
 
-### Explaining some counterintuitive change
+### Explaining some performance hack
 
-Belongs in the git history, which should be easily accessible with tooling! Also goes away automatically
-once the code is changed / deleted.
+Ok, most of the time you can write readable code and not worry about performance, but sometimes performance
+actually matters. When you have to write a performance hack, you might have an urge to write a comment explaining
+why. The instinct to want to document your performance hack is the right one, but a comment is the wrong place.
+Why? Because the hacky code might get modified, removed, or moved somewhere else, and the person who does that has to
+remember to update the comment too. The comment will never "break" and force you to fix it if the behavior of the
+hack changes, it will just stick around to confuse future programmers in perpetuity.
+
+The right place to document hacks is a commit message. Why a commit message?
+It is easily accessible (with the right tooling) to programmers wanting to edit the code, but it doesn't make
+the code harder to read. If your source control history isn't easily accessible to programmers, then you need
+better tooling. I use [fugitive.vim](https://github.com/tpope/vim-fugitive) to easily `git blame` any line that
+I want to know more about. Combined with
+[git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/),
+I'm never more that a few quick commands away from figuring out exactly why a line was written in a certain way.
+Commit messages will never become out of date, because if the line that they're modifying gets deleted or modified, the commit message gets automatically "removed" from your immediate view in `git blame`.
+
 
 ### Old code you want to keep around
 
