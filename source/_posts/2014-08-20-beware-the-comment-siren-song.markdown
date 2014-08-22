@@ -9,7 +9,7 @@ categories:
 ---
 
 Developers love comments! They love documenting their code, leaving little comment breadcrumbs that explain some
-tricky section of code, or leaving a reminder for their later self. Everyone who writes these comments thinks
+tricky section of code, or leaving a reminder for their later self. Everyone who writes a comment thinks
 that they're making a [pareto improvement](http://en.wikipedia.org/wiki/Pareto_efficiency) to the codebase, when,
 in fact, it's quite the opposite. Comments are especially dangerous because there are many situations where it
 *seems* like a comment will help, but beware the siren's call!
@@ -23,35 +23,9 @@ the first place)
 I hate reading articles that make abstract arguments, so, enough bloviating, let's check out some examples.
 Here are some concrete uses of comments that I've seen a lot, and how they can be easily avoided.
 
-### Reminder / TODO
+### Explaining some code
 
-Reminders belong somewhere besides your source code. Writing `TODO` or `FIXME` somewhere in the codebase creates
-a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
-TODO is that that "someone will surely see this code and proactively delete it", but in reality that will
-never happen. Every time someone goes into that section of the code, they're in there for some other purpose
-and they're going to ignore your TODO. This is especially true on bigger teams.
-
-Example:
-
-```ruby
-require 'mylibrary/railtie' if defined?(Rails) # TODO: older rails support!
-```
-
-Realistically, when is that TODO ever going to get done? Instead of writing a comment, use the
-[doby](https://github.com/andyw8/do_by) library, or roll your own expiring todos.
-
-```ruby
-TODO 'older rails support!', '2014-09-01'
-require 'mylibrary/railtie' if defined?(Rails)
-```
-
-This method sets a specific due date for the `TODO`, and, unlike a regular comment, it actually gets executed
-and blows up if you haven't removed it before the due date! (buyer beware: you probably only want this behavior
-in dev!)
-
-### Explaining why code is written a certain way
-
-Another tempting moment when you want to write a comment is to explain some code that isn't 100% intuitive. Let's
+You might want to write a comment to explain some code that isn't 100% intuitive. Let's
 take a practical example from the [Genius](http://genius.com) codebase:
 
 ```ruby
@@ -98,6 +72,33 @@ Now we have the same amount of information, and a reusable method that explains 
 `ActiveRecord` changes its behavior, and returning nil suddenly starts halting save, we can change this method
 and [lift all boats](http://en.wikipedia.org/wiki/A_rising_tide_lifts_all_boats).
 
+### Reminder / TODO
+
+Writing `TODO` or `FIXME` somewhere in the codebase creates
+a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
+TODO is that that "someone will surely see this code and proactively delete it", but in reality that will
+never happen. Every time someone goes into that section of the code, they're in there for some other purpose
+and they're going to ignore your TODO. This is especially true on bigger teams.
+
+Example:
+
+```ruby
+require 'mylibrary/railtie' if defined?(Rails) # TODO: older rails support!
+```
+
+Realistically, when is that TODO ever going to get done? A better solution would be to use some project management
+tool to prioritize different features or fixes. If you have to keep your `TODO`s in the code, use the
+[doby](https://github.com/andyw8/do_by) library, or roll your own expiring todos.
+
+```ruby
+TODO 'older rails support!', '2014-09-01'
+require 'mylibrary/railtie' if defined?(Rails)
+```
+
+This method sets a specific due date for the `TODO`, and, unlike a regular comment, it actually gets executed
+and blows up if you haven't removed it before the due date. (buyer beware: you probably only want this behavior
+in dev)
+
 ### Explaining some performance hack
 
 Most of the time you can write readable code and not worry about performance, but sometimes performance
@@ -116,7 +117,28 @@ I want to know more about. In concert with
 I'm never more that a few quick commands away from figuring out exactly why a line was written in a certain way.
 Commit messages will never become out of date, because if the line that they're modifying gets deleted or modified, the commit message gets automatically "removed" from your immediate view in `git blame`.
 
-### Old code you want to keep around
+When I'm writing a performance hack, I typically wrap it in a method explaining that it's a hack, and then write
+a more detailed explanation in the commit message. For example, let's say I've written some fast array compare
+based on some specific knowledge of a data structure:
+
+```ruby
+
+def some_complex_calculation_method(input_array)
+  if compare_input_with_stored_values_performance_hack(self.stored_array, input_array)
+    # ... something ...
+  end
+end
+
+def compare_input_with_stored_values_performance_hack(stored_array, input_array)
+  # here be dragons
+end
+
+```
+
+All I need to do is to give the reader some clue that it's a performance hack, and then they can read more in
+the commit message if they want.
+
+### Old code you "want to keep around" in case you need it
 
 This is by far the worst commenting infraction! You might see a comment like:
 
