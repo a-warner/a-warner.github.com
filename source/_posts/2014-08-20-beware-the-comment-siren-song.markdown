@@ -34,12 +34,76 @@ and how they can be easily avoided.
 
 ### Reminder / TODO
 
-Belongs somewhere besides source control. Especially for big teams, distributed responsibility
-really means tragedy of the commons / bystander apathy.
+Reminders belong somewhere besides your source code. Writing `TODO` or `FIXME` somewhere in the codebase creates
+a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
+TODO is that that "someone will surely see this code and proactively delete it", but the reality is that will
+never happen. Every time someone goes into that section of the code, they're in there for some other purpose
+and they're going to ignore your TODO. This is especially true on bigger teams.
+
+Example:
+
+```ruby
+require 'mylibrary/railtie' if defined?(Rails) # TODO: older rails support!
+```
+
+Realistically, when is that TODO every going to get done? Practical suggestion: use the wonderful
+[doby](https://github.com/andyw8/do_by) library, or roll your own expiring todos.
+
+```ruby
+TODO 'older rails support!', '2014-09-01'
+require 'mylibrary/railtie' if defined?(Rails)
+```
+
+This method sets a specific due date for the `TODO`, and, unlike a regular comment, it actually gets executed
+and blows up if you haven't removed it before the due date! (buyer beware: you probably only want this behavior
+in dev!)
 
 ### Explaining why code is doing something
 
-Quick example of activerecord callback halting
+Another tempting moment when you want to write a comment is to explain some code that isn't 100% intuitive. Let's
+take a practical example from the [Genius](http://genius.com) codebase:
+
+```ruby
+class Artist < ActiveRecord::Base
+  before_save :set_canonical_name_changed
+
+  private
+
+  def set_canonical_name_changed
+    self.canonical_name_changed = !!canonical_name.try(:name_changed?)
+    nil # return nil because if canonical_name is unchanged, it'll return false, which halts save!
+  end
+end
+```
+
+So that comment helpfully explains that `ActiveRecord` will halt saving a model if one of the callbacks returns
+false. So, we have to return nil instead. So how can we explain this without a comment? Why not just write a
+helpful method which explains what's going on, and can be easily reused?
+
+```ruby
+ActiveRecord::Base.class_eval do
+  def without_halting_save
+    yield
+    nil
+  end
+end
+
+class Artist < ActiveRecord::Base
+  before_save :set_canonical_name_changed
+
+  private
+
+  def set_canonical_name_changed
+    without_halting_save do
+      self.canonical_name_changed = !!canonical_name.try(:name_changed?)
+    end
+  end
+end
+```
+
+Now we have the same amount of information, and a reusable method that explains its intent. Plus, now if
+`ActiveRecord` changes its behavior, and returning nil suddenly starts halting save, we can change this method
+and [lift all boats](http://en.wikipedia.org/wiki/A_rising_tide_lifts_all_boats).
 
 ### Explaining some counterintuitive change
 
