@@ -8,13 +8,12 @@ categories:
 - Programming
 ---
 
-Developers love comments! They love documenting their code, leaving little comment breadcrumbs that explain some
-tricky section of code, or leaving a reminder for their later self. Everyone who writes a comment thinks
-that they're making a [pareto improvement](http://en.wikipedia.org/wiki/Pareto_efficiency) to the codebase, when,
-in fact, it's quite the opposite. Comments are especially dangerous because there are many situations where it
+Developers love comments! Everyone who writes a comment thinks
+that they're making a [pareto improvement](http://en.wikipedia.org/wiki/Pareto_efficiency) to the codebase, when
+in fact it's quite the opposite. Comments are especially dangerous because there are many situations where it
 *seems* like a comment will help, but beware the siren's call!
 
-I hate reading articles that make abstract arguments, so, enough bloviating, let's check out some examples.
+I hate reading articles that make abstract arguments, so enough bloviating, let's check out some examples.
 Here are some concrete uses of comments that I've seen a lot, and how they can be easily avoided.
 
 ### Explaining some code
@@ -35,7 +34,7 @@ class Artist < ActiveRecord::Base
 end
 ```
 
-So that comment helpfully explains that `ActiveRecord` will halt saving a model if one of the callbacks returns
+That comment helpfully explains that `ActiveRecord` will halt saving a model if one of the callbacks returns
 `false`. So, we have to return `nil` instead. Whenever you're tempted to comment your code to explain what's going on,
 the code isn't clear enough. Your goal should be to make the code readable on its own.
 So how can we make this section clearer without a comment? Why not just write a helpful method which explains
@@ -72,7 +71,7 @@ Most of the time you can write readable code without worrying about performance,
 actually matters. When you have to write a performance hack, you might have an urge to write a comment explaining
 why. The instinct to want to document your performance hack is the right one, but a comment is the wrong place.
 Why? Because the hacky code might get modified, removed, or moved somewhere else, and the person who does that
-has to remember to update the comment too. (spoiler alert: they're not going to do it) The comment will never
+has to remember to update the comment too. (Spoiler alert: they're not going to do it.) The comment will never
 "break" and force someone to fix it if the behavior of the hack changes, it will just stick around to confuse
 future programmers.
 
@@ -84,9 +83,9 @@ Unlike comments, commit messages will never become out of date, because if the l
 On any long-running project, your source control *is* your documentation. Disciplined development teams strive to
 write code that, as much as possible, is self-documenting. When some code doesn't speak for itself, they leave
 their notes in commit messages. If there is any additional discussion over some implementation detail or code
-design in a pull-request, it should be easy to find it right from source control.
+design in a pull request, it should be easy to find it right from source control.
 [git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/)
-allows you to find the GitHub pull-request that merged the commit you're looking at, so you can quickly look
+allows you to find the GitHub pull request that merged the commit you're looking at, so you can quickly look
 for any technical discussion about some implementation.
 
 When I'm writing a performance hack, I typically wrap it in a method explaining that it's a hack, and then write
@@ -114,7 +113,7 @@ the commit message if they want.
 
 Writing `TODO` or `FIXME` somewhere in the codebase creates
 a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
-TODO is that that "someone will surely see this code and proactively delete it", but in reality that will
+TODO is that "someone will surely see this code and proactively delete it", but in reality that will
 never happen. Every time someone goes into that section of the code, they're in there for some other purpose
 and they're going to ignore your TODO. This is especially true on bigger teams.
 
@@ -134,8 +133,8 @@ require 'mylibrary/railtie' if defined?(Rails)
 ```
 
 This method sets a specific due date for the `TODO`, and, unlike a regular comment, it actually gets executed
-and blows up if you haven't removed it before the due date. (buyer beware: you probably only want this behavior
-in dev)
+and blows up if you haven't removed it before the due date. (Buyer beware: you probably only want this behavior
+in dev.)
 
 ### Old code you "want to keep around" in case you need it
 
@@ -208,7 +207,7 @@ To be clear, I don't have a problem with all comments. If you're writing a publi
 a library that's getting exported to the world, or to a bunch of developers at your company, it may be
 easiest to maintain the documentation for that API in code comments. In other words, if you're making a
 conscious decision to document a library thoroughly, you might find that it's most convenient to keep that
-documentation close to the code. In that case, you should have some kind of process around making sure that
+documentation close to the code. In that case, you should have some kind of process for making sure that
 the documentation remains up to date when you make breaking API changes. You should also be able to easily
 generate structured documentation from those code comments.  ([RDoc](http://rdoc.sourceforge.net/) for Ruby
 is one simple example)
@@ -218,8 +217,8 @@ is one simple example)
 Comments decay. They aren't compiled, and they'll never get executed at runtime. If they become out of date or
 incorrect, no test is going to fail and no user is going to complain.
 Programmers work around them out of fear that "somebody might need this comment or it might provide some value
-in the future", pushing them along far after they're useful. (if you can even argue that they were useful in
-the first place)
+in the future", pushing them along far after they're useful (if you can even argue that they were useful in
+the first place).
 
 So now that I've covered all of these examples, you don't have any excuse to write comments. Give these
 methods a try, and I promise you'll have a cleaner codebase that's easier to maintain. Is there a good reason
