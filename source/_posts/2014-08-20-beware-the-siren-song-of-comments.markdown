@@ -114,9 +114,11 @@ to programmers wanting to edit the code, but it doesn't clog up the code and mak
 it harder to read. `git blame` allows you to see the commit message for any line that you're looking at.
 Unlike comments, commit messages will never become out of date, because if the line that they're modifying gets deleted or modified, the commit message gets automatically "removed" from your view in `git blame`.
 
-On any long-running project, your source control *is* your documentation. Disciplined development teams write
-commit messages that explain the motivation for any non-trivial bit of code. If there is any discussion over some implementation detail or code design in a pull-request, it should be easy to find that right from source
-control. [git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/)
+On any long-running project, your source control *is* your documentation. Disciplined development teams strive to
+write code that, as much as possible, is self-documenting. When some code doesn't speak for itself, they leave
+their notes in commit messages. If there is any additional discussion over some implementation detail or code
+design in a pull-request, it should be easy to find that right from source control.
+[git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/)
 allows you to find the GitHub pull-request that merged the commit you're looking at, so you can quickly look
 for any technical discussion about some implementation.
 
