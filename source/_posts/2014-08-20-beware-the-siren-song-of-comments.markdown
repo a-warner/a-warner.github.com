@@ -66,33 +66,6 @@ Now we have the same amount of information, and a reusable method that explains 
 `ActiveRecord` changes its behavior, and returning nil suddenly starts halting save, we can change this method
 and [lift all boats](http://en.wikipedia.org/wiki/A_rising_tide_lifts_all_boats).
 
-### Reminder / TODO
-
-Writing `TODO` or `FIXME` somewhere in the codebase creates
-a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
-TODO is that that "someone will surely see this code and proactively delete it", but in reality that will
-never happen. Every time someone goes into that section of the code, they're in there for some other purpose
-and they're going to ignore your TODO. This is especially true on bigger teams.
-
-Example:
-
-```ruby
-require 'mylibrary/railtie' if defined?(Rails) # TODO: older rails support!
-```
-
-Realistically, when is that TODO ever going to get done? A better solution would be to use some project management
-tool to prioritize different features or fixes. If you have to keep your `TODO`s in the code, use the
-[doby](https://github.com/andyw8/do_by) library, or roll your own expiring todos.
-
-```ruby
-TODO 'older rails support!', '2014-09-01'
-require 'mylibrary/railtie' if defined?(Rails)
-```
-
-This method sets a specific due date for the `TODO`, and, unlike a regular comment, it actually gets executed
-and blows up if you haven't removed it before the due date. (buyer beware: you probably only want this behavior
-in dev)
-
 ### Explaining some performance hack
 
 Most of the time you can write readable code without worrying about performance, but sometimes performance
@@ -136,6 +109,33 @@ end
 
 All I need to do is to give the reader some clue that it's a performance hack, and then they can read more in
 the commit message if they want.
+
+### Reminder / TODO
+
+Writing `TODO` or `FIXME` somewhere in the codebase creates
+a bit of a [bystander effect](http://en.wikipedia.org/wiki/Bystander_effect). It seems like the intent of the
+TODO is that that "someone will surely see this code and proactively delete it", but in reality that will
+never happen. Every time someone goes into that section of the code, they're in there for some other purpose
+and they're going to ignore your TODO. This is especially true on bigger teams.
+
+Example:
+
+```ruby
+require 'mylibrary/railtie' if defined?(Rails) # TODO: older rails support!
+```
+
+Realistically, when is that TODO ever going to get done? A better solution would be to use some project management
+tool to prioritize different features or fixes. If you have to keep your `TODO`s in the code, use the
+[doby](https://github.com/andyw8/do_by) library, or roll your own expiring todos.
+
+```ruby
+TODO 'older rails support!', '2014-09-01'
+require 'mylibrary/railtie' if defined?(Rails)
+```
+
+This method sets a specific due date for the `TODO`, and, unlike a regular comment, it actually gets executed
+and blows up if you haven't removed it before the due date. (buyer beware: you probably only want this behavior
+in dev)
 
 ### Old code you "want to keep around" in case you need it
 
