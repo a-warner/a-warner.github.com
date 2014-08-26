@@ -42,7 +42,7 @@ end
 ```
 
 So that comment helpfully explains that `ActiveRecord` will halt saving a model if one of the callbacks returns
-`false`. So, we have to return nil instead. Whenever you're tempted to comment your code to explain what's going on,
+`false`. So, we have to return `nil` instead. Whenever you're tempted to comment your code to explain what's going on,
 the code isn't clear enough. Your goal should be to make the code readable on its own.
 So how can we make this section clearer without a comment? Why not just write a helpful method which explains
 what's going on, and can be easily reused?
