@@ -84,7 +84,7 @@ Unlike comments, commit messages will never become out of date, because if the l
 On any long-running project, your source control *is* your documentation. Disciplined development teams strive to
 write code that, as much as possible, is self-documenting. When some code doesn't speak for itself, they leave
 their notes in commit messages. If there is any additional discussion over some implementation detail or code
-design in a pull-request, it should be easy to find that right from source control.
+design in a pull-request, it should be easy to find it right from source control.
 [git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/)
 allows you to find the GitHub pull-request that merged the commit you're looking at, so you can quickly look
 for any technical discussion about some implementation.
