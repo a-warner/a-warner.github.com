@@ -204,7 +204,7 @@ through the class and figure out what the code is doing.
 
 ### Is there ever a reason to write a comment?
 
-To be clear, I don't have a problem with all comments. If, for example, you're writing a public API for
+To be clear, I don't have a problem with all comments. If you're writing a public API for
 a library that's getting exported to the world, or to a bunch of developers at your company, it may be
 easiest to maintain the documentation for that API in code comments. In other words, if you're making a
 conscious decision to document a library thoroughly, you might find that it's most convenient to keep that
