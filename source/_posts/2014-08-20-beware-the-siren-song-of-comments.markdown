@@ -14,12 +14,6 @@ that they're making a [pareto improvement](http://en.wikipedia.org/wiki/Pareto_e
 in fact, it's quite the opposite. Comments are especially dangerous because there are many situations where it
 *seems* like a comment will help, but beware the siren's call!
 
-Comments decay. They aren't compiled, and they'll never get executed at runtime. If they become out of date or
-incorrect, no test is going to fail and no user is going to complain.
-Programmers work around them out of fear that "somebody might need this comment or it might provide some value
-in the future", pushing them along far after they're useful. (if you can even argue that they were useful in
-the first place)
-
 I hate reading articles that make abstract arguments, so, enough bloviating, let's check out some examples.
 Here are some concrete uses of comments that I've seen a lot, and how they can be easily avoided.
 
@@ -220,6 +214,12 @@ generate structured documentation from those code comments.  ([RDoc](http://rdoc
 is one simple example)
 
 ### Leave 'em out
+
+Comments decay. They aren't compiled, and they'll never get executed at runtime. If they become out of date or
+incorrect, no test is going to fail and no user is going to complain.
+Programmers work around them out of fear that "somebody might need this comment or it might provide some value
+in the future", pushing them along far after they're useful. (if you can even argue that they were useful in
+the first place)
 
 So now that I've covered all of these examples, you don't have any excuse to write comments. Give these
 methods a try, and I promise you'll have a cleaner codebase that's easier to maintain. Is there a good reason
