@@ -101,21 +101,24 @@ in dev)
 
 ### Explaining some performance hack
 
-Most of the time you can write readable code and not worry about performance, but sometimes performance
+Most of the time you can write readable code without worrying about performance, but sometimes performance
 actually matters. When you have to write a performance hack, you might have an urge to write a comment explaining
 why. The instinct to want to document your performance hack is the right one, but a comment is the wrong place.
-Why? Because the hacky code might get modified, removed, or moved somewhere else, and the person who does that has to
-remember to update the comment too. The comment will never "break" and force you to fix it if the behavior of the
-hack changes, it will just stick around to confuse future programmers.
+Why? Because the hacky code might get modified, removed, or moved somewhere else, and the person who does that
+has to remember to update the comment too. (spoiler alert: they're not going to do it) The comment will never
+"break" and force someone to fix it if the behavior of the hack changes, it will just stick around to confuse
+future programmers.
 
 The right place to document hacks is a commit message. A commit message is easily accessible
-(with the right tooling) to programmers wanting to edit the code, but it doesn't clog up the code and make
-it harder to read. If your source control history isn't easily accessible to programmers, then you need
-better tooling. I use [fugitive.vim](https://github.com/tpope/vim-fugitive) to easily `git blame` any line that
-I want to know more about. In concert with
-[git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/),
-I'm never more that a few quick commands away from figuring out exactly why a line was written in a certain way.
-Commit messages will never become out of date, because if the line that they're modifying gets deleted or modified, the commit message gets automatically "removed" from your immediate view in `git blame`.
+to programmers wanting to edit the code, but it doesn't clog up the code and make
+it harder to read. `git blame` allows you to see the commit message for any line that you're looking at.
+Unlike comments, commit messages will never become out of date, because if the line that they're modifying gets deleted or modified, the commit message gets automatically "removed" from your view in `git blame`.
+
+On any long-running project, your source control *is* your documentation. Disciplined development teams write
+commit messages that explain the motivation for any non-trivial bit of code. If there is any discussion over some implementation detail or code design in a pull-request, it should be easy to find that right from source
+control. [git getpull](http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/)
+allows you to find the GitHub pull-request that merged the commit you're looking at, so you can quickly look
+for any technical discussion about some implementation.
 
 When I'm writing a performance hack, I typically wrap it in a method explaining that it's a hack, and then write
 a more detailed explanation in the commit message. For example, let's say I've written some fast array compare
