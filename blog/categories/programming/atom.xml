@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | Least Astonished]]></title>
   <link href="http://www.leastastonished.com/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.leastastonished.com/"/>
-  <updated>2014-08-27T08:28:37-04:00</updated>
+  <updated>2014-08-27T08:36:24-04:00</updated>
   <id>http://www.leastastonished.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>Developers love comments! Everyone who writes a comment thinks
 that they&rsquo;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when
 in fact it&rsquo;s quite the opposite. Comments are especially dangerous because there are many situations where it
-<em>seems</em> like a comment will help, but beware the siren&rsquo;s call!</p>
+<em>seems</em> like a comment will help, but beware the siren&rsquo;s call.</p>
 
 <p>I hate reading articles that make abstract arguments, so enough bloviating, let&rsquo;s check out some examples.
 Here are some concrete uses of comments that I&rsquo;ve seen a lot, and how they can be easily avoided.</p>
