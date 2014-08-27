@@ -11,7 +11,7 @@ categories:
 Developers love comments! Everyone who writes a comment thinks
 that they're making a [pareto improvement](http://en.wikipedia.org/wiki/Pareto_efficiency) to the codebase, when
 in fact it's quite the opposite. Comments are especially dangerous because there are many situations where it
-*seems* like a comment will help, but beware the siren's call!
+*seems* like a comment will help, but beware the siren's call.
 
 I hate reading articles that make abstract arguments, so enough bloviating, let's check out some examples.
 Here are some concrete uses of comments that I've seen a lot, and how they can be easily avoided.
