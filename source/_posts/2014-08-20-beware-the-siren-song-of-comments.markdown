@@ -16,6 +16,8 @@ in fact it's quite the opposite. Comments are especially dangerous because there
 I hate reading articles that make abstract arguments, so enough bloviating, let's check out some examples.
 Here are some concrete uses of comments that I've seen a lot, and how they can be easily avoided.
 
+<!-- more -->
+
 ### Explaining some code
 
 You might want to write a comment to explain some code that isn't 100% intuitive. Let's
