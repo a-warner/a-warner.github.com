@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Least Astonished]]></title>
   <link href="http://www.leastastonished.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://www.leastastonished.com/"/>
-  <updated>2014-08-27T08:36:24-04:00</updated>
+  <updated>2014-08-27T08:37:57-04:00</updated>
   <id>http://www.leastastonished.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Beware the Siren Song of Comments]]></title>
-    <link href="http://www.leastastonished.com/blog/2014/08/20/beware-the-siren-song-of-comments/"/>
-    <updated>2014-08-20T08:53:27-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2014/08/20/beware-the-siren-song-of-comments</id>
+    <link href="http://www.leastastonished.com/blog/2014/08/27/beware-the-siren-song-of-comments/"/>
+    <updated>2014-08-27T08:37:08-04:00</updated>
+    <id>http://www.leastastonished.com/blog/2014/08/27/beware-the-siren-song-of-comments</id>
     <content type="html"><![CDATA[<p>Developers love comments! Everyone who writes a comment thinks
 that they&rsquo;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when
 in fact it&rsquo;s quite the opposite. Comments are especially dangerous because there are many situations where it
