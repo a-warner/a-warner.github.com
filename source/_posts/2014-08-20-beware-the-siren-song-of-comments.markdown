@@ -222,6 +222,10 @@ Programmers work around them out of fear that "somebody might need this comment 
 in the future", pushing them along far after they're useful (if you can even argue that they were useful in
 the first place).
 
+Writing a comment to explain your code is the easy way out. It is more difficult to write expressive code than it is
+to write a paragraph explaining it, but taking the time to write code that speaks for itself pays huge dividends in
+the long run.
+
 So now that I've covered all of these examples, you don't have any excuse to write comments. Give these
 methods a try, and I promise you'll have a cleaner codebase that's easier to maintain. Is there a good reason
 to write a comment that I've missed? Let me know in the comments!
