@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Beware the Siren Song of Comments"
-date: 2014-08-20 08:53:27 -0400
+date: 2014-08-27 08:37:08 -0400
 comments: true
 categories:
 - Ruby
