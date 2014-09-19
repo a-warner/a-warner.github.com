@@ -9,9 +9,7 @@
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="Developers love comments! Everyone who writes a comment thinks
-that they&rsquo;re making a pareto improvement to the codebase, when
-in fact it&rsquo; &hellip;">
+  <meta name="description" content="Developers love comments! Everyone who writes a comment thinks that they&#8217;re making a pareto improvement to the codebase, when in fact it&#8217 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,300 +111,23 @@ in fact it&rsquo; &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Developers love comments! Everyone who writes a comment thinks
-that they&rsquo;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when
-in fact it&rsquo;s quite the opposite. Comments are especially dangerous because there are many situations where it
-<em>seems</em> like a comment will help, but beware the siren&rsquo;s call.</p>
+<div class="entry-content"><div id='rg_embed_link_521365' class='rg_embed_link'>
 
-<p>I hate reading articles that make abstract arguments, so enough bloviating, let&rsquo;s check out some examples.
-Here are some concrete uses of comments that I&rsquo;ve seen a lot, and how they can be easily avoided.</p>
+Developers love comments! Everyone who writes a comment thinks that they&#8217;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when in fact it&#8217;s quite the opposite. Comments are especially dangerous because there are many situations where it <i>seems</i> like a comment will help, but beware the siren&#8217;s call.
+
+I hate reading articles that make abstract arguments, so enough bloviating, let&#8217;s check out some examples. Here are some concrete uses of comments that I&#8217;ve seen a lot, and how they can be easily avoided.
 
 <!-- more -->
 
+Read <a href="http://tech.genius.com/Andrew-warner-beware-the-siren-song-of-comments-annotated">“Beware the Siren Song of Comments” by Andrew Warner</a> on News Genius
 
-<h3>Explaining some code</h3>
-
-<p>You might want to write a comment to explain some code that isn&rsquo;t 100% intuitive. Let&rsquo;s
-take a practical example from the <a href="http://genius.com">Genius</a> codebase:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Artist</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:set_canonical_name_changed</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">set_canonical_name_changed</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">canonical_name_changed</span> <span class="o">=</span> <span class="o">!!</span><span class="n">canonical_name</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:name_changed?</span><span class="p">)</span>
-</span><span class='line'>    <span class="kp">nil</span> <span class="c1"># return nil because if canonical_name is unchanged, it&#39;ll return false, which halts save!</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+</div>
 
 
-<p>That comment helpfully explains that <code>ActiveRecord</code> will halt saving a model if one of the callbacks returns
-<code>false</code>. So, we have to return <code>nil</code> instead. Whenever you&rsquo;re tempted to comment your code to explain what&rsquo;s going on,
-the code isn&rsquo;t clear enough. Your goal should be to make the code readable on its own.
-So how can we make this section clearer without a comment? Why not just write a helpful method which explains
-what&rsquo;s going on, and can be easily reused?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">without_halting_save</span>
-</span><span class='line'>    <span class="k">yield</span>
-</span><span class='line'>    <span class="kp">nil</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">Artist</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:set_canonical_name_changed</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">private</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">set_canonical_name_changed</span>
-</span><span class='line'>    <span class="n">without_halting_save</span> <span class="k">do</span>
-</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">canonical_name_changed</span> <span class="o">=</span> <span class="o">!!</span><span class="n">canonical_name</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:name_changed?</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now we have the same amount of information, and a reusable method that explains its intent. Plus, now if
-<code>ActiveRecord</code> changes its behavior, and returning nil suddenly starts halting save, we can change this method
-and <a href="http://en.wikipedia.org/wiki/A_rising_tide_lifts_all_boats">lift all boats</a>.</p>
+<script src='//tech.genius.com/songs/521365/embed.js?u=143768'></script>
 
-<h3>Explaining some performance hack</h3>
-
-<p>Most of the time you can write readable code without worrying about performance, but sometimes performance
-actually matters. When you have to write a performance hack, you might have an urge to write a comment explaining
-why. The instinct to want to document your performance hack is the right one, but a comment is the wrong place.
-Why? Because the hacky code might get modified, removed, or moved somewhere else, and the person who does that
-has to remember to update the comment too. (Spoiler alert: they&rsquo;re not going to do it.) The comment will never
-&ldquo;break&rdquo; and force someone to fix it if the behavior of the hack changes, it will just stick around to confuse
-future programmers.</p>
-
-<p>The right place to document hacks is a commit message. A commit message is easily accessible
-to programmers wanting to edit the code, but it doesn&rsquo;t clog up the code and make
-it harder to read. <code>git blame</code> allows you to see the commit message for any line that you&rsquo;re looking at.
-Unlike comments, commit messages will never become out of date, because if the line that they&rsquo;re modifying gets deleted or modified, the commit message gets automatically &ldquo;removed&rdquo; from your view in <code>git blame</code>.</p>
-
-<p>On any long-running project, your source control <em>is</em> your documentation. Disciplined development teams strive to
-write code that, as much as possible, is self-documenting. When some code doesn&rsquo;t speak for itself, they leave
-their notes in commit messages. If there is any additional discussion over some implementation detail or code
-design in a pull request, it should be easy to find it right from source control.
-<a href="http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/">git getpull</a>
-allows you to find the GitHub pull request that merged the commit you&rsquo;re looking at, so you can quickly look
-for any technical discussion about some implementation.</p>
-
-<p>When I&rsquo;m writing a performance hack, I typically wrap it in a method explaining that it&rsquo;s a hack, and then write
-a more detailed explanation in the commit message. For example, let&rsquo;s say I&rsquo;ve written some fast array compare
-based on some specific knowledge of a data structure:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">some_complex_calculation_method</span><span class="p">(</span><span class="n">input_array</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">compare_input_with_stored_values_performance_hack</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">stored_array</span><span class="p">,</span> <span class="n">input_array</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1"># ... something ...</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">compare_input_with_stored_values_performance_hack</span><span class="p">(</span><span class="n">stored_array</span><span class="p">,</span> <span class="n">input_array</span><span class="p">)</span>
-</span><span class='line'>  <span class="c1"># here be dragons</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>All I need to do is to give the reader some clue that it&rsquo;s a performance hack, and then they can read more in
-the commit message if they want.</p>
-
-<h3>Reminder / TODO</h3>
-
-<p>Writing <code>TODO</code> or <code>FIXME</code> somewhere in the codebase creates
-a bit of a <a href="http://en.wikipedia.org/wiki/Bystander_effect">bystander effect</a>. It seems like the intent of the
-TODO is that &ldquo;someone will surely see this code and proactively delete it&rdquo;, but in reality that will
-never happen. Every time someone goes into that section of the code, they&rsquo;re in there for some other purpose
-and they&rsquo;re going to ignore your TODO. This is especially true on bigger teams.</p>
-
-<p>Example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;mylibrary/railtie&#39;</span> <span class="k">if</span> <span class="n">defined?</span><span class="p">(</span><span class="no">Rails</span><span class="p">)</span> <span class="c1"># TODO: older rails support!</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Realistically, when is that TODO ever going to get done? A better solution would be to use some project management
-tool to prioritize different features or fixes. If you have to keep your <code>TODO</code>s in the code, use the
-<a href="https://github.com/andyw8/do_by">doby</a> library, or roll your own expiring todos.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">TODO</span> <span class="s1">&#39;older rails support!&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-09-01&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;mylibrary/railtie&#39;</span> <span class="k">if</span> <span class="n">defined?</span><span class="p">(</span><span class="no">Rails</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This method sets a specific due date for the <code>TODO</code>, and, unlike a regular comment, it actually gets executed
-and blows up if you haven&rsquo;t removed it before the due date. (Buyer beware: you probably only want this behavior
-in dev.)</p>
-
-<h3>Old code you &ldquo;want to keep around&rdquo; in case you need it</h3>
-
-<p>This is by far the worst commenting infraction! You might see a comment like:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># def reslug_all_tag_pages</span>
-</span><span class='line'><span class="c1">#   Tag.find_each { |t| t.regenerate_slug! }</span>
-</span><span class='line'><span class="c1"># end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">something_else_thats_actually_being_used</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&ldquo;Keeping around old code you might want to use later&rdquo; is <em>exactly</em> what source control is for. If you want
-to resurrect some old code, you can do so easily with git as long as you can remember some part of the
-code. Let&rsquo;s say you want to resurrect this <code>reslug_all_tag_pages</code> method. Just use:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git log -Sreslug_all_tag_pages
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and that will find all commits that added or deleted a line including that string. Simple!</p>
-
-<h3>Automatically generated comments</h3>
-
-<p>It&rsquo;s less common in the world of dynamic languages, but the most popular IDEs for compiled
-languages tend to pepper the codebase with these useless automatically generated strings. They generate these
-comments to remind programmers to document their APIs, but I&rsquo;ve frequently seen developers commit
-the automatically generated documentation on a method or class without modification. Some examples:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">private</span> <span class="kt">int</span> <span class="n">myVar</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="cm">/**</span>
-</span><span class='line'><span class="cm">   * @return the myVar</span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getMyVar</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">myVar</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="cm">/**</span>
-</span><span class='line'><span class="cm">   * @param myVar the myVar to set</span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMyVar</span><span class="o">(</span><span class="kt">int</span> <span class="n">myVar</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="k">this</span><span class="o">.</span><span class="na">myVar</span> <span class="o">=</span> <span class="n">myVar</span><span class="o">;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="cm">/* (non-Javadoc)</span>
-</span><span class='line'><span class="cm">   * @see java.util.ArrayList#addAll(java.util.Collection)</span>
-</span><span class='line'><span class="cm">   */</span>
-</span><span class='line'>  <span class="nd">@Override</span>
-</span><span class='line'>  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">collection</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="c1">// something</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The generated comments do nothing but clutter up the code, making it more difficult for the reader to scroll
-through the class and figure out what the code is doing.</p>
-
-<h3>Is there ever a reason to write a comment?</h3>
-
-<p>To be clear, I don&rsquo;t have a problem with all comments. If you&rsquo;re writing a public API for
-a library that&rsquo;s getting exported to the world, or to a bunch of developers at your company, it may be
-easiest to maintain the documentation for that API in code comments. In other words, if you&rsquo;re making a
-conscious decision to document a library thoroughly, you might find that it&rsquo;s most convenient to keep that
-documentation close to the code. In that case, you should have some kind of process for making sure that
-the documentation remains up to date when you make breaking API changes. You should also be able to easily
-generate structured documentation from those code comments.  (<a href="http://rdoc.sourceforge.net/">RDoc</a> for Ruby
-is one simple example)</p>
-
-<h3>Leave &lsquo;em out</h3>
-
-<p>Comments decay. They aren&rsquo;t compiled, and they&rsquo;ll never get executed at runtime. If they become out of date or
-incorrect, no test is going to fail and no user is going to complain.
-Programmers work around them out of fear that &ldquo;somebody might need this comment or it might provide some value
-in the future&rdquo;, pushing them along far after they&rsquo;re useful (if you can even argue that they were useful in
-the first place).</p>
-
-<p>Writing a comment to explain your code is the easy way out. It is more difficult to write expressive code than it is
-to write a paragraph explaining it, but taking the time to write code that speaks for itself pays huge dividends in
-the long run.</p>
-
-<p>So now that I&rsquo;ve covered all of these examples, you don&rsquo;t have any excuse to write comments. Give these
-methods a try, and I promise you&rsquo;ll have a cleaner codebase that&rsquo;s easier to maintain. Is there a good reason
-to write a comment that I&rsquo;ve missed? Let me know in the comments!</p>
 </div>
 
 
