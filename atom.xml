@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Least Astonished]]></title>
-  <link href="http://www.leastastonished.com/atom.xml" rel="self"/>
-  <link href="http://www.leastastonished.com/"/>
-  <updated>2014-09-18T23:14:49-04:00</updated>
-  <id>http://www.leastastonished.com/</id>
+  <title><![CDATA[Strong Opinions Weakly Typed]]></title>
+  <link href="http://www.strongopinionsweaklytyped.com/atom.xml" rel="self"/>
+  <link href="http://www.strongopinionsweaklytyped.com/"/>
+  <updated>2014-12-11T22:22:20-05:00</updated>
+  <id>http://www.strongopinionsweaklytyped.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Beware the Siren Song of Comments]]></title>
-    <link href="http://www.leastastonished.com/blog/2014/08/27/beware-the-siren-song-of-comments/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2014/08/27/beware-the-siren-song-of-comments/"/>
     <updated>2014-08-27T08:37:08-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2014/08/27/beware-the-siren-song-of-comments</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2014/08/27/beware-the-siren-song-of-comments</id>
     <content type="html"><![CDATA[<div id='rg_embed_link_521365' class='rg_embed_link'>
 
 Developers love comments! Everyone who writes a comment thinks that they&#8217;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when in fact it&#8217;s quite the opposite. Comments are especially dangerous because there are many situations where it <i>seems</i> like a comment will help, but beware the siren&#8217;s call.
@@ -40,9 +40,9 @@ Read <a href="http://tech.genius.com/Andrew-warner-beware-the-siren-song-of-comm
   
   <entry>
     <title type="html"><![CDATA[Choosing a New Theme]]></title>
-    <link href="http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme/"/>
     <updated>2014-08-13T23:25:46-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2014/08/13/choosing-a-new-theme</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme</id>
     <content type="html"><![CDATA[<p>About a week ago I finally decided that I wanted to start blogging again. I love talking about programming, but I often find it
 difficult to motivate myself to write a blog post about it. I sat down to write a post, and sure enough, I couldn&rsquo;t think of anything
 to blog about. So instead I procrastinated by thinking about all of the things I wanted to do to make my blog better.</p>
@@ -114,9 +114,9 @@ somewhat interesting topic to blog about (I hope!), accomplishing my original go
   
   <entry>
     <title type="html"><![CDATA[Git-getpull: Quickly Find the Pull Request That Merged Your Commit to Master]]></title>
-    <link href="http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/"/>
     <updated>2014-03-06T14:40:00-05:00</updated>
-    <id>http://www.leastastonished.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master</id>
     <content type="html"><![CDATA[<div id='rg_embed_link_270809' class='rg_embed_link'>
   <span style="display: none;"
     Read <a href="http://news.rapgenius.com/Andrew-warner-git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master-annotated">&#8220;Git-getpull: Quickly find the pull request that merged your commit to master&#8221; by Andrew Warner</a> on News Genius
@@ -140,9 +140,9 @@ somewhat interesting topic to blog about (I hope!), accomplishing my original go
   
   <entry>
     <title type="html"><![CDATA[The 3 Ways to Get the Size of an Active Record Relation]]></title>
-    <link href="http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/"/>
     <updated>2013-04-21T18:14:00-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation</id>
     <content type="html"><![CDATA[<p>If you&rsquo;re reading this and your first thought is, &ldquo;there are 3 ways to get the size of a relation?&rdquo;, then
 you&rsquo;ve come to the right place! Basically, given a relation like <code>Post.all</code> or <code>User.first.posts</code>, when you
 want to know the size, you&rsquo;ve got 3 choices: <code>size</code>, <code>length</code>, and <code>count</code>.  At first glance, it seems like these
@@ -209,9 +209,9 @@ Record.</p>
   
   <entry>
     <title type="html"><![CDATA[Use the Rails Router for Routing!]]></title>
-    <link href="http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2013/04/21/use-the-rails-router-for-routing/"/>
     <updated>2013-04-21T17:41:00-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2013/04/21/use-the-rails-router-for-routing</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2013/04/21/use-the-rails-router-for-routing</id>
     <content type="html"><![CDATA[<p>This is a quick one, and the title says most of it.  Basically, you should never have code like this in
 your app:</p>
 
@@ -268,9 +268,9 @@ checks routes in order.  All set!</p>
   
   <entry>
     <title type="html"><![CDATA[Simple Active Record Query Debugging in the Rails Console]]></title>
-    <link href="http://www.leastastonished.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/"/>
     <updated>2013-03-17T18:22:00-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console</id>
     <content type="html"><![CDATA[<p>Stop me if this sounds familiar.  You&rsquo;re tooling around in the Rails console, testing out some new code you&rsquo;re working on (or debugging some slow/broken code), and you see a ton of repeat queries.</p>
 
 <p>I have this experience frequently; usually I can figure out what&rsquo;s going on, but sometimes it can be quite tricky to track down the source of extra queries.  Whenever I want to figure out where a method is getting called from, one easy and lazy solution is to add a debugger statement in that code.  But where the heck do I add a debugger for sql statements?</p>
@@ -355,9 +355,9 @@ checks routes in order.  All set!</p>
   
   <entry>
     <title type="html"><![CDATA[My First Blog Post]]></title>
-    <link href="http://www.leastastonished.com/blog/2013/03/17/my-first-blog-post/"/>
+    <link href="http://www.strongopinionsweaklytyped.com/blog/2013/03/17/my-first-blog-post/"/>
     <updated>2013-03-17T18:07:00-04:00</updated>
-    <id>http://www.leastastonished.com/blog/2013/03/17/my-first-blog-post</id>
+    <id>http://www.strongopinionsweaklytyped.com/blog/2013/03/17/my-first-blog-post</id>
     <content type="html"><![CDATA[<p>This is my first blog post! I setup up my blog using <a href="http://octopress.org/">Octopress</a>, which was incredibly easy.  They&rsquo;ve got some great guides on their site, but just to give you a sense of exactly how easy it is, I simply:</p>
 
 <ul>

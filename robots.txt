@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://www.leastastonished.com/sitemap.xml 
+Sitemap: http://www.strongopinionsweaklytyped.com/sitemap.xml 
