@@ -12,7 +12,9 @@ categories:
     Read <a href="http://news.rapgenius.com/Andrew-warner-git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master-annotated">"Git-getpull: Quickly find the pull request that merged your commit to master" by Andrew Warner</a> on News Genius
   </span>
 
+  <p>
   Ideally <code><a href="http://genius.com/2457353" target="_blank">git blame</a></code> would give you all the context you need to determine why some code was written. But the reality is that no team is perfectly disciplined, and sometimes you're going to run across commits with cryptic or ambiguous messages ("bugfix," anyone?).
+  </p>
 </div>
 
 <!-- more -->
