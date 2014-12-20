@@ -4,7 +4,7 @@
   <title><![CDATA[Strong Opinions Weakly Typed]]></title>
   <link href="http://www.strongopinionsweaklytyped.com/atom.xml" rel="self"/>
   <link href="http://www.strongopinionsweaklytyped.com/"/>
-  <updated>2014-12-20T17:39:55-05:00</updated>
+  <updated>2014-12-20T17:46:46-05:00</updated>
   <id>http://www.strongopinionsweaklytyped.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -20,9 +20,11 @@
     <id>http://www.strongopinionsweaklytyped.com/blog/2014/08/27/beware-the-siren-song-of-comments</id>
     <content type="html"><![CDATA[<div id='rg_embed_link_521365' class='rg_embed_link'>
 
+<p>
 Developers love comments! Everyone who writes a comment thinks that they&#8217;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when in fact it&#8217;s quite the opposite. Comments are especially dangerous because there are many situations where it <i>seems</i> like a comment will help, but beware the siren&#8217;s call.
 
 I hate reading articles that make abstract arguments, so enough bloviating, let&#8217;s check out some examples. Here are some concrete uses of comments that I&#8217;ve seen a lot, and how they can be easily avoided.
+</p>
 
 <!-- more -->
 
@@ -122,7 +124,9 @@ somewhat interesting topic to blog about (I hope!), accomplishing my original go
     Read <a href="http://news.rapgenius.com/Andrew-warner-git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master-annotated">&#8220;Git-getpull: Quickly find the pull request that merged your commit to master&#8221; by Andrew Warner</a> on News Genius
   </span>
 
+  <p>
   Ideally <code><a href="http://genius.com/2457353" target="_blank">git blame</a></code> would give you all the context you need to determine why some code was written. But the reality is that no team is perfectly disciplined, and sometimes you&#8217;re going to run across commits with cryptic or ambiguous messages (&#8220;bugfix,&#8221; anyone?).
+  </p>
 </div>
 
 

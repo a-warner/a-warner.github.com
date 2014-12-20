@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | Strong Opinions Weakly Typed]]></title>
   <link href="http://www.strongopinionsweaklytyped.com/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.strongopinionsweaklytyped.com/"/>
-  <updated>2014-12-20T17:39:55-05:00</updated>
+  <updated>2014-12-20T17:46:46-05:00</updated>
   <id>http://www.strongopinionsweaklytyped.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
@@ -20,9 +20,11 @@
     <id>http://www.strongopinionsweaklytyped.com/blog/2014/08/27/beware-the-siren-song-of-comments</id>
     <content type="html"><![CDATA[<div id='rg_embed_link_521365' class='rg_embed_link'>
 
+<p>
 Developers love comments! Everyone who writes a comment thinks that they&#8217;re making a <a href="http://en.wikipedia.org/wiki/Pareto_efficiency">pareto improvement</a> to the codebase, when in fact it&#8217;s quite the opposite. Comments are especially dangerous because there are many situations where it <i>seems</i> like a comment will help, but beware the siren&#8217;s call.
 
 I hate reading articles that make abstract arguments, so enough bloviating, let&#8217;s check out some examples. Here are some concrete uses of comments that I&#8217;ve seen a lot, and how they can be easily avoided.
+</p>
 
 <!-- more -->
 
