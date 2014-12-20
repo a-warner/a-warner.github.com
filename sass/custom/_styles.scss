@@ -7,7 +7,7 @@ html {
 
 
 body {
-	font-family: 'Georgia', serif; font-size: 17px; color: #000;
+	font-family: 'Georgia', serif; font-size: 18px; line-height: 1.8em; color: #333;
 	max-width: 750px;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
@@ -173,6 +173,10 @@ aside {
 
 body > nav a { text-shadow: none; }
 
+p {
+  -webkit-font-smoothing: antialiased;
+}
+
 @font-face {
     font-family: 'entypo';
     src: url('/assets/fonts/entypo.eot');
@@ -247,7 +251,7 @@ body header hgroup {
   }
 
   h1 {
-    font-size: 1.5em;
+    font-size: 1.4em;
     margin: 5px 0px 5px;
   }
 
@@ -255,7 +259,7 @@ body header hgroup {
     display: none;
     margin: .2em 0 0;
     @extend .sans;
-    font-size: 1em;
+    font-size: 0.9em;
     color: $subtitle-color;
     font-weight: normal;
     font-family: $header-subtitle-font-family;
