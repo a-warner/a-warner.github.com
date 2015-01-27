@@ -1,84 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2014/08/27/beware-the-siren-song-of-comments/</loc>
     <lastmod>2014-08-27T08:37:08-04:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme/</loc>
     <lastmod>2014-08-13T23:25:46-04:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/</loc>
     <lastmod>2014-03-06T14:40:00-05:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/</loc>
     <lastmod>2013-04-21T18:14:00-04:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2013/04/21/use-the-rails-router-for-routing/</loc>
     <lastmod>2013-04-21T17:41:00-04:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2013/03/17/simple-active-record-query-debugging-in-the-rails-console/</loc>
     <lastmod>2013-03-17T18:22:00-04:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/2013/03/17/my-first-blog-post/</loc>
     <lastmod>2013-03-17T18:07:00-04:00</lastmod>
     <priority>0.8</priority>
   </url>
-  
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/blog/archives/</loc>
-    <lastmod>2014-12-20T17:46:46-05:00</lastmod>
+    <lastmod>2015-01-27T13:43:12-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/</loc>
-    <lastmod>2014-12-20T17:46:46-05:00</lastmod>
+    <lastmod>2015-01-27T13:43:12-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/about/</loc>
-    <lastmod>2014-12-20T17:46:46-05:00</lastmod>
+    <lastmod>2015-01-27T13:43:12-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/recent/</loc>
-    <lastmod>2014-12-20T17:46:46-05:00</lastmod>
+    <lastmod>2015-01-27T13:43:12-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
     <loc>http://www.strongopinionsweaklytyped.com/repos/</loc>
-    <lastmod>2014-12-20T17:46:46-05:00</lastmod>
+    <lastmod>2015-01-27T13:43:12-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  
 </urlset>
