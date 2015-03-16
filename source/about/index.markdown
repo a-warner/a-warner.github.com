@@ -7,6 +7,8 @@ sharing: true
 footer: true
 ---
 
+<script async src="//genius.codes"></script>
+
 Hi!
 
 I'm Andrew Warner. I studied Computer Science and Psychology at Wesleyan University.  I have worked at companies large and small and with tech stacks ranging from Java/Spring to [Ruby on Rails](http://rubyonrails.org/). I'm currently the Director of Engineering at [Genius](http://genius.com), where I'm working on creating technology to annotate all of text.
