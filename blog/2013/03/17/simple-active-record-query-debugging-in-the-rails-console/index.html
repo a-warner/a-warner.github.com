@@ -123,7 +123,7 @@
 
 <p>Enter a relatively short addition to your <code>.irbrc</code> or <code>.pryrc</code>!  Simply add the following method:</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -149,21 +149,21 @@
 </span><span class='line'><span class="no">    CODE</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Note that my debugger preference is <code>pry</code>, if it&rsquo;s available.  You can of course adjust the above code per your preference.  Now we can simply run:</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">add_debugger</span> <span class="no">MyModel</span><span class="o">.</span><span class="n">singleton_class</span><span class="p">,</span> <span class="ss">:find_by_sql</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Running through our problem code again, you should find yourself in the debugger for any queries on <code>MyModel</code>.  Once in the debugger, simply inspect <code>caller</code> to figure out what pesky bit of code is generating all of the extra queries.</p>
 
 <p>This is great, but it would incomplete if we had to restart the server in order to remove the debugger statement!  The following snippet should do the trick:</p>
 
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -181,7 +181,7 @@
 </span><span class='line'>    <span class="n">undef_method</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="s2">_without_debugger&quot;</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Just run <code>remove_debugger MyModel.singleton_class, :find_by_sql</code>, and you&rsquo;re back to regular development.</p>
