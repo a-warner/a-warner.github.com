@@ -12,10 +12,10 @@
   clear: both;
 }
 
-.snake {
-  background: red;
-}
-
 .apple {
   background: green;
+}
+
+.snake {
+  background: red;
 }
