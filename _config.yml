@@ -2,12 +2,12 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://www.strongopinionsweaklytyped.com
+url: https://www.strongopinionsweaklytyped.com
 title: Strong Opinions Weakly Typed
 subtitle: Andrew Warner
 author: Andrew Warner
-simple_search: http://google.com/search
-description: Software Engineer and technology enthusiast <br> Director of Engineering at <a href="http://genius.com">Genius</a>
+simple_search: https://google.com/search
+description: Software Engineer and technology enthusiast <br> CTO at <a href="https://genius.com">Genius</a>
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
