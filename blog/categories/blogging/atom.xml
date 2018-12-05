@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: blogging | Strong Opinions Weakly Typed]]></title>
-  <link href="http://www.strongopinionsweaklytyped.com/blog/categories/blogging/atom.xml" rel="self"/>
-  <link href="http://www.strongopinionsweaklytyped.com/"/>
-  <updated>2015-07-10T09:17:51-04:00</updated>
-  <id>http://www.strongopinionsweaklytyped.com/</id>
+  <link href="https://www.strongopinionsweaklytyped.com/blog/categories/blogging/atom.xml" rel="self"/>
+  <link href="https://www.strongopinionsweaklytyped.com/"/>
+  <updated>2018-12-05T09:18:36-05:00</updated>
+  <id>https://www.strongopinionsweaklytyped.com/</id>
   <author>
     <name><![CDATA[Andrew Warner]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Choosing a new theme]]></title>
-    <link href="http://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme/"/>
+    <link href="https://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme/"/>
     <updated>2014-08-13T23:25:46-04:00</updated>
-    <id>http://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme</id>
+    <id>https://www.strongopinionsweaklytyped.com/blog/2014/08/13/choosing-a-new-theme</id>
     <content type="html"><![CDATA[<p>About a week ago I finally decided that I wanted to start blogging again. I love talking about programming, but I often find it
 difficult to motivate myself to write a blog post about it. I sat down to write a post, and sure enough, I couldn&rsquo;t think of anything
 to blog about. So instead I procrastinated by thinking about all of the things I wanted to do to make my blog better.</p>
