@@ -9,7 +9,7 @@
   <meta name="author" content="Andrew Warner">
 
   
-  <meta name="description" content="Developers love comments! Everyone who writes a comment thinks that they&#8217;re making a pareto improvement to the codebase, when in fact it&#8217 &hellip;">
+  <meta name="description" content="This post also appeared on the Genius Engineering blog. As part of our recently announced deal with Apple Music, you can now view Genius lyrics for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +92,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/">Faster and Simpler With the Command Line: Deep-comparing Two 5GB JSON Files 3X Faster by Ditching the Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-12-07T07:42:27-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>7:42 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>This post also appeared on <a href="https://genius.engineering/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/">the Genius Engineering blog</a>.</em></p>
+
+<p>As part of our <a href="https://genius.com/a/genius-gets-smart-with-apple-music">recently announced deal with Apple Music</a>, you can now view Genius lyrics for your favorite music within the Apple Music app.</p>
+
+<p>We deliver our lyrics to Apple via a nightly export of newline-delimited JSON objects. With millions of songs in our catalog, these dumps can easily get as big as 5 GB. It’s not quite “big data”, but it’s also not something you can easily open in vim.</p>
+
+<p>Our first iteration of the code that generated these nightly exports was slow and failure-prone. So, we recently did a ground up rewrite focused on speed and reliability, which yielded significant improvements on both axes—stay tuned for a future blog post on that subject. But other than spot-checking with small data sets, how could we make sure that the new export process wasn’t introducing regressions? We decided to run both export processes concurrently and compare the generated exports from each method to make sure the new version was a comprehensive replacement.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -402,6 +442,10 @@ your app:</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/">Faster and Simpler With the Command Line: Deep-comparing Two 5GB JSON Files 3X Faster by Ditching the Code</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/27/beware-the-siren-song-of-comments/">Beware the Siren Song of Comments</a>
       </li>
     
@@ -415,10 +459,6 @@ your app:</p>
     
       <li class="post">
         <a href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/">The 3 Ways to Get the Size of an Active Record Relation</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/21/use-the-rails-router-for-routing/">Use the Rails Router for Routing!</a>
       </li>
     
   </ul>

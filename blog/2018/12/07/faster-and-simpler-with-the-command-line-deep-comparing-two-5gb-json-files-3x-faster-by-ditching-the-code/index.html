@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Faster and Simpler With the Command Line: Deep-comparing Two 5GB JSON Files 3X Faster by Ditching the Code - Strong Opinions Weakly Typed</title>
+  <meta name="author" content="Andrew Warner">
+
+  
+  <meta name="description" content="This post also appeared on the Genius Engineering blog. As part of our recently announced deal with Apple Music, you can now view Genius lyrics for &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://www.strongopinionsweaklytyped.com/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link href="/favicon.ico" rel="icon" type="image/x-icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Strong Opinions Weakly Typed" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+<script src="/javascripts/genius_code.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39386705-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <a class="photo-link" href="/about"><div class="header-photo" title="Andrew Warner"></div></a>
+  <h1><a href="/">Strong Opinions Weakly Typed</a></h1>
+  <h2><a href="/about">Andrew Warner</a></h2>
+  <h3>Software Engineer and technology enthusiast <br> CTO at <a href="https://genius.com">Genius</a></h3>
+  <div class="social-navigation">
+  <a href="https://github.com/a-warner" target="_blank"><i class="entypo-social">&#62208;</i><span class="name">GitHub</span></a>
+  <a href="https://twitter.com/wwarner" target="_blank"><i class="entypo-social">&#62217;</i><span class="name">Twitter</span></a>
+  <a href="https://www.linkedin.com/in/andrewwarnerdev" target="_blank"><i class="entypo-social">&#62232;</i><span class="name">LinkedIn</span></a>
+</div>
+
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.strongopinionsweaklytyped.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+<div class="social-navigation">
+  <a href="https://github.com/a-warner" target="_blank"><i class="entypo-social">&#62208;</i><span class="name">GitHub</span></a>
+  <a href="https://twitter.com/wwarner" target="_blank"><i class="entypo-social">&#62217;</i><span class="name">Twitter</span></a>
+  <a href="https://www.linkedin.com/in/andrewwarnerdev" target="_blank"><i class="entypo-social">&#62232;</i><span class="name">LinkedIn</span></a>
+</div>
+
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <script async src="//genius.codes"></script>
+<div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Faster and Simpler With the Command Line: Deep-comparing Two 5GB JSON Files 3X Faster by Ditching the Code</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-12-07T07:42:27-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>7:42 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>This post also appeared on <a href="https://genius.engineering/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/">the Genius Engineering blog</a>.</em></p>
+
+<p>As part of our <a href="https://genius.com/a/genius-gets-smart-with-apple-music">recently announced deal with Apple Music</a>, you can now view Genius lyrics for your favorite music within the Apple Music app.</p>
+
+<p>We deliver our lyrics to Apple via a nightly export of newline-delimited JSON objects. With millions of songs in our catalog, these dumps can easily get as big as 5 GB. It’s not quite “big data”, but it’s also not something you can easily open in vim.</p>
+
+<p>Our first iteration of the code that generated these nightly exports was slow and failure-prone. So, we recently did a ground up rewrite focused on speed and reliability, which yielded significant improvements on both axes—stay tuned for a future blog post on that subject. But other than spot-checking with small data sets, how could we make sure that the new export process wasn’t introducing regressions? We decided to run both export processes concurrently and compare the generated exports from each method to make sure the new version was a comprehensive replacement.</p>
+
+<!-- more -->
+
+
+<p>What’s the best way to compare these two 5GB files? A good first check is whether the new and old exports have the same number of lines; we can do this on the command line by dividing <code>wc -l</code> (line count) of the old export by <code>wc -l</code> of the new export using <code>bc</code>. If you haven’t seen <code>bc</code> before, don&rsquo;t worry: I hadn&rsquo;t either! It’s a tool to do simple arithmetic in the console.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "scale=3; $(wc -l &lt; old_export.json) / $(wc -l &lt; new_export.json)" | bc
+</span><span class='line'>.999</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok great! The old export has 99.9% of the line count of the new export, meaning the new version actually has <em>more</em> lines than the old export, so off to a good start.</p>
+
+<p>Next, we can use <code>diff</code> to get the percentage of lines that are different between the new and old export. We&rsquo;ll use the <code>--side-by-side</code> and <code>--suppress-common-lines</code> flags so that we can pipe the output from <code>diff</code> directly to <code>wc</code> to get a count of total lines that differ between the two exports.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "scale=3; $(diff --side-by-side --suppress-common-lines old_export.json new_export.json | wc -l) / $(wc -l &lt; new_export.json)" | bc
+</span><span class='line'>1.000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OOPS! Our diff is showing 100% of the lines differing.. either we seriously screwed up with this new export or our diff methodology is flawed.</p>
+
+<p>Let&rsquo;s take a look at how these objects are structured (payload slightly modified for simplicity):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ head -n2 old_export.json
+</span><span class='line'>{"genius_id":1,"title":"Killa Cam","artist":"Cam’ron","featured_artists":["Opera Steve"],"producers":["The Heatmakerz"],"url":"https://genius.com/Camron-killa-cam-lyrics","lyrics":"..."}
+</span><span class='line'>{"genius_id":3,"title":"Can I Live","artist":"JAY-Z","featured_artists":[],"producers":["Irv Gotti"], "url":"https://genius.com/Jay-z-can-i-live-lyrics","lyrics":"..."}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fairly standard newline-delimited JSON. Let&rsquo;s look at the new export:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ head -n2 new_export.json
+</span><span class='line'>{"url": "https://genius.com/Lil-wayne-fly-out-lyrics", "title": "Fly Out", "artist": "Lil Wayne", "lyrics": "...", "genius_id": 23, "producers": ["Marques Houston", "T-Mix"], "featured_artists": []}
+</span><span class='line'>{"url": "https://genius.com/Wu-tang-clan-cream-lyrics", "title": "C.R.E.A.M.", "artist": "Wu-Tang Clan", "lyrics": "...", "genius_id": 28, "producers": ["RZA"],"featured_artists": []}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Yikes, it appears that not only does the new export methodology not order songs in the same way, it doesn&rsquo;t have the same order of keys within each JSON object. This means that even if the actual JSON content of the files was 100% the same, it would look 100% different with our naive <code>diff</code> strategy.</p>
+
+<h3>Enter <code>jq</code></h3>
+
+<p>My first thought was to write a ruby script to parse and compare the two exports, but after spending a little time coding something up I had a program that was starting to get fairly complicated, didn&rsquo;t work correctly, <em>and</em> was too slow—my first cut took well over an hour. Then I thought: is this one of those situations where a simple series of shell commands can replace a complex purpose-built script?</p>
+
+<p>Enter <code>jq</code>, <a href="https://stedolan.github.io/jq/">a powerful command-line tool for processing JSON objects</a>. Note: <code>jq</code> is not related to jQuery, but its name does make googling for examples a little tricky! Up until this point I had mostly used <code>jq</code> for pretty-printing JSON, a feature it is quite good at. For example, you can do:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ curl -s https://api.cdnjs.com/libraries/jquery | jq</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And see a nice pretty-printed version of the CDNJS response for jQuery.</p>
+
+<p><code>jq</code> also allows you to dig out specific fields from some JSON, e.g. going back to our exports, to get the list of ids from each export:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ head -n2 old_export.json | jq '.genius_id'
+</span><span class='line'>1
+</span><span class='line'>3
+</span><span class='line'>$ head -n2 new_export.json | jq '.genius_id'
+</span><span class='line'>23
+</span><span class='line'>28</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s pretty much all I had used <code>jq</code> for before looking through these exports. But it turns out that <code>jq</code> is incredibly powerful as a tool for processing JSON (check out <a href="https://github.com/stedolan/jq/wiki/Cookbook">the <code>jq</code> cookbook</a> to see some of the neat things that are possible). You can run entire programs, or “filters” as <code>jq</code> calls them (“filter” because it takes an input and produces an output), to iterate over, modify, and transform JSON objects.</p>
+
+<p>How can we use it to solve the problem at hand, diffing these two large JSON files?</p>
+
+<p>Well first we need to sort these files so that tools like <code>diff</code> can easily compare them. But we can&rsquo;t just use <code>sort</code>; we need to sort them by the value of the <code>genius_id</code>s in their payload.</p>
+
+<p>It turns out this is quite easy with <code>jq</code>. To sort the exports by <code>genius_id</code> we can run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat old_export.json | jq -csMS 'sort_by(.genius_id)[]' &gt; sorted_old_export.json
+</span><span class='line'>$ cat new_export.json | jq -csMS 'sort_by(.genius_id)[]' &gt; sorted_new_export.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running through these options:</p>
+
+<ul>
+<li><code>-c / --compact-output</code> makes sure the JSON objects remain compact and not pretty printed</li>
+<li><code>-s / --slurp</code> reads each object into an in-memory array instead of processing one object at a time, which we need in order to sort the file</li>
+<li><code>-M / --monochrome-output</code> prevents the JSON from being colorized in the terminal</li>
+<li><code>-S / --sort-keys</code> makes sure that each JSON object&rsquo;s keys are sorted, ensuring that the order of keys within each object payload is consistent between exports when we compare them</li>
+</ul>
+
+
+<p>And, of course, the <code>jq</code> expression to sort the file itself is quite terse! It&rsquo;s just <code>sort_by(.genius_id)</code>, which sorts the slurped in array by id, and then there&rsquo;s a little <code>[]</code> on the end which basically splays the sorted array back out into newline-delimited JSON.</p>
+
+<p>This takes a little while, but once it&rsquo;s done we&rsquo;ve got two sorted files ready to be compared!</p>
+
+<p>But wait.. not so fast. There are still a few keys in our export, specifically <code>featured_artists</code> and <code>producers</code> that are arrays of string values, and it&rsquo;s not guaranteed that each export will generate those in the same order.</p>
+
+<p>Not to worry: <code>jq</code> has a solution to that problem too! We want to sort each of those keys in the output as well, which we can do by complicating our expression just a little more:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat old_export.json | jq -csMS 'map(.featured_artists |= sort | .producers |= sort) | sort_by(.genius_id)[]' &gt; sorted_old_export.json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now the expression is a little more tricky. Let&rsquo;s break it down.</p>
+
+<ul>
+<li><code>map</code> does what you expect and maps over each object, much as <code>sort_by</code> operates on each object.</li>
+<li>Within that <code>map</code> operation we&rsquo;re first calling <code>.featured_artists |= sort</code>, which uses the <a href="https://stedolan.github.io/jq/manual/#Update-assignment:|="><code>|=</code> update operator</a> to do an in-place alphabetic sort on the <code>featured_artists</code> array. This is a bit confusing, but all it&rsquo;s doing is running the value of <code>featured_artists</code> through a <code>sort</code> &ldquo;filter&rdquo;, sorting it, then assigning that sorted value back to the <code>featured_artists</code> key of the object, and passing on the the entire object that <code>featured_artists</code> key is in. It would be equivalent to <code>map(.featured_artists = (.featured_artists | sort))</code>. If you don&rsquo;t know what that <code>|</code> does, don&rsquo;t worry.. read on!</li>
+<li>Next up we use <a href="https://stedolan.github.io/jq/manual/#Pipe:|"><code>|</code> operator</a> to pipe the previous step to our next step which just sorts the <code>producers</code> array exactly as we did the <code>featured_artists</code> array. The pipe operator works exactly like the unix-style pipe on the command line, so we&rsquo;re essentially sorting the <code>featured_artists</code> array, returning the full object it resides in, and then running that same operation for <code>producers</code> on the result.</li>
+<li>And then we just feed that object with its sorted arrays into our sort operator from before using another pipe.</li>
+</ul>
+
+
+<p>And voila! We&rsquo;ve got two normalized 5 GB JSON blobs, all that&rsquo;s left is to feed them back into our <code>diff</code> operation just like before to see how similar they are:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "scale=3; $(diff --side-by-side --suppress-common-lines sorted_old_export.json sorted_new_export.json | wc -l) / $(wc -l &lt; sorted_new_export.json)" | bc
+</span><span class='line'>.002</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So after all that normalizing we find that only 0.2% of the lines differ between the exports! That&rsquo;s an incredible start for a complete rewrite of fairly complicated export process. Plus this whole thing takes about 10 minutes to generate each normalized file on my macbook pro and then less than a minute to compare them, already much faster than my naive ruby script.</p>
+
+<p>The final step was looking through specific differing examples to figure out why the logic produced slightly different export outputs, but getting into the details of that is application logic and not what this post is about.</p>
+
+<p>Hopefully now you&rsquo;ll reach for <code>jq</code> the next time you want to manipulate JSON files on the command line.. or at least if you want to pretty print an API response.</p>
+
+<h2>Additional discussion</h2>
+
+<p>One thing that bugged me about this solution was the explicit sorting of each key. What if we later added more arrays, or if we had deeply nested objects! Since we were just comparing two specific export results with an unchanging schema over the course of a couple of weeks, this didn&rsquo;t really matter, but it was bugging me so I poked around looking for a more generic way of normalizing JSON objects.</p>
+
+<p>If you check out the <a href="https://github.com/stedolan/jq/wiki/FAQ#general-questions"><code>jq</code> FAQ</a> you&rsquo;ll find that there was a function called <code>walk</code> introduced as a built-in after 1.5, which allows you deeply iterate through JSON objects and modify them. It wasn&rsquo;t in the version I was using but it was simple enough to copy it into my program, which it turns out made the code much simpler:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="err">#</span> <span class="nx">from</span> <span class="nx">https</span><span class="o">:</span><span class="c1">//github.com/stedolan/jq/wiki/FAQ#general-questions</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">def</span> <span class="nx">walk</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span><span class="o">:</span>
+</span><span class='line'>  <span class="p">.</span> <span class="nx">as</span> <span class="nx">$in</span>
+</span><span class='line'>    <span class="o">|</span> <span class="k">if</span> <span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span> <span class="nx">then</span>
+</span><span class='line'>    <span class="nx">reduce</span> <span class="nx">keys_unsorted</span><span class="p">[]</span> <span class="nx">as</span> <span class="nx">$key</span>
+</span><span class='line'>    <span class="p">(</span> <span class="p">{};</span> <span class="p">.</span> <span class="o">+</span> <span class="p">{</span> <span class="p">(</span><span class="nx">$key</span><span class="p">)</span><span class="o">:</span>  <span class="p">(</span><span class="nx">$in</span><span class="p">[</span><span class="nx">$key</span><span class="p">]</span> <span class="o">|</span> <span class="nx">walk</span><span class="p">(</span><span class="nx">f</span><span class="p">))</span> <span class="p">}</span> <span class="p">)</span> <span class="o">|</span> <span class="nx">f</span>
+</span><span class='line'>    <span class="nx">elif</span> <span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;array&quot;</span> <span class="nx">then</span> <span class="nx">map</span><span class="p">(</span> <span class="nx">walk</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">)</span> <span class="o">|</span> <span class="nx">f</span>
+</span><span class='line'>    <span class="k">else</span> <span class="nx">f</span>
+</span><span class='line'>    <span class="nx">end</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">#</span> <span class="nx">actual</span> <span class="nx">custom</span> <span class="nx">jq</span> <span class="nx">program</span>
+</span><span class='line'><span class="nx">walk</span><span class="p">(</span> <span class="k">if</span> <span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;array&quot;</span> <span class="nx">then</span> <span class="nx">sort</span> <span class="k">else</span> <span class="p">.</span> <span class="nx">end</span> <span class="p">)</span> <span class="o">|</span> <span class="nx">sort_by</span><span class="p">(.</span><span class="nx">genius_id</span><span class="p">)[]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It turned out that this also made it significantly slower to normalize each file, so I ended up just using the more verbose and brittle version, but the <code>walk</code> version is a lot cleaner!</p>
+
+<p>Also, you might be curious how you can run the above file.. you can also run <code>jq</code> program files using the <code>-f</code> option, so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span> <span class="nx">cat</span> <span class="nx">my_file</span><span class="p">.</span><span class="nx">json</span> <span class="o">|</span> <span class="nx">jq</span> <span class="o">-</span><span class="nx">csMS</span> <span class="o">-</span><span class="nx">f</span> <span class="nx">normalize</span><span class="p">.</span><span class="nx">jq</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Andrew Warner</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2018-12-07T07:42:27-05:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>7:42 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="https://www.strongopinionsweaklytyped.com/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/" data-via="wwarner" data-counturl="https://www.strongopinionsweaklytyped.com/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/27/beware-the-siren-song-of-comments/" title="Previous Post: Beware the Siren Song of Comments">&laquo; Beware the Siren Song of Comments</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/">Faster and Simpler With the Command Line: Deep-comparing Two 5GB JSON Files 3X Faster by Ditching the Code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/27/beware-the-siren-song-of-comments/">Beware the Siren Song of Comments</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/13/choosing-a-new-theme/">Choosing a New Theme</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/06/git-getpull-quickly-find-the-pull-request-that-merged-your-commit-to-master/">Git-getpull: Quickly Find the Pull Request That Merged Your Commit to Master</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/21/the-3-ways-to-get-the-size-of-an-active-record-relation/">The 3 Ways to Get the Size of an Active Record Relation</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/a-warner">@a-warner</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'a-warner',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><div class="footer-links">
+  <a href="/recent">Recent Posts</a>
+  <a href="/repos">GitHub Repos</a>
+</div>
+</p>
+<p>
+  Copyright &copy; 2018 - Andrew Warner
+  <br>
+  Made using <a href="https://github.com/imathis/octopress">Octopress</a> and <a href="https://github.com/mjhea0/whiterspace">Whiterspace</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'leastastonished';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'https://www.strongopinionsweaklytyped.com/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/';
+        var disqus_url = 'https://www.strongopinionsweaklytyped.com/blog/2018/12/07/faster-and-simpler-with-the-command-line-deep-comparing-two-5gb-json-files-3x-faster-by-ditching-the-code/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
